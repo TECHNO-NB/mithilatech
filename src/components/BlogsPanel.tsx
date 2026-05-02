@@ -16,7 +16,12 @@ import {
 import Card from "./Card";
 import InputField from "./InputField";
 import axios from "axios";
-import SimpleMDE from "react-simplemde-editor";
+import dynamic from "next/dynamic";
+
+const SimpleMDE = dynamic(
+  () => import("react-simplemde-editor"),
+  { ssr: false }
+);
 import "easymde/dist/easymde.min.css";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
