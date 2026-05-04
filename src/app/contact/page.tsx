@@ -266,7 +266,7 @@ const page = () => {
               {
                 icon: Mail,
                 label: "Email",
-                val: "info@mithilatech.com.np",
+                val: "info@mithilatechsolutions.com",
                 color: "#C084FC",
               },
             ].map((item, i) => (

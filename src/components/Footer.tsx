@@ -5,10 +5,23 @@ import React from "react";
 import logo from "../../public/mithilatechlogo.jpeg";
 import Image from "next/image";
 import whatsapp from "../../public/whatsapp.png";
+import { useRouter } from "next/navigation";
 
 const NAV_LINKS = ["Home", "About", "Services", "Products", "Blogs", "Contact"];
 
+
+
 const Footer = () => {
+  const navigate =useRouter()
+  const handleNavigate = (link: string) => {
+    const path = link.toLocaleLowerCase();
+    if (path === "home") {
+      navigate.push("/");
+    
+    } else {
+      navigate.push(`/${path}`);
+    }
+  };
   return (
     <footer
       style={{
@@ -71,7 +84,7 @@ const Footer = () => {
             {NAV_LINKS.map((l) => (
               <button
                 key={l}
-                onClick={() => scrollTo(l.toLowerCase())}
+                onClick={() => handleNavigate(l)}
                 style={{
                   background: "none",
                   border: "none",

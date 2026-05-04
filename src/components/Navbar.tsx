@@ -98,10 +98,11 @@ export default function Navbar() {
                   fontSize: 16,
                   fontWeight: 800,
                   letterSpacing: "-0.02em",
+                  color:"white",
                   lineHeight: 1.1,
                 }}
               >
-                Mithila Tech
+                Mithila 
               </div>
               <div
                 style={{
@@ -112,7 +113,7 @@ export default function Navbar() {
                   textTransform: "uppercase",
                 }}
               >
-                IT Solutions
+                Tech & IT Solutions
               </div>
             </div>
           </motion.div>
