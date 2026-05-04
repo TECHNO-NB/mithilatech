@@ -39,7 +39,7 @@ import "./App.css";
 import About from "./about/page";
 import Services from "./services/page";
 import Products from "./products/page";
-import Blogs from "./blogs/page";
+import BlogsShort from "./blogshort/page";
 import Contact from "./contact/page";
 import LandingPage from "@/components/LandingPage";
 
@@ -88,7 +88,7 @@ export default function App() {
        <Products/>
 
       {/* Blogs */}
-       <Blogs/>
+       <BlogsShort/>
 
       {/* Contact */}
        <Contact/>

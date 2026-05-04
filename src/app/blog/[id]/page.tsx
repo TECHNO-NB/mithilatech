@@ -1,69 +1,100 @@
 // @ts-nocheck
 "use client";
-import Image from 'next/image';
-import "../../App.css"
+
+import Image from "next/image";
+import "../../App.css";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const BlogPost = () => {
-  const BLOG = {
-    title: "Why Every Nepali Business Needs a Website in 2024",
-    date: "Dec 15, 2024",
-    read: "5 min read",
-    tag: "Web Dev",
-    // Changed w=400 to w=1200 in the URL for a crisper, high-quality image
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80", 
-  };
+  const [BLOG, setBlog] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/${id}`,
+        );
+
+        // FIX: single object, not array
+        const data = {
+          ...res.data,
+          tags: res.data.tags ? JSON.parse(res.data.tags) : [],
+        };
+
+        setBlog(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchBlog();
+  }, [id]);
+
+  if (!BLOG) {
+    return (
+      <div style={{ color: "white", textAlign: "center", marginTop: 100 }}>
+        Loading...
+      </div>
+    );
+  }
 
   return (
-    <main className="min-h-screen w-full flex flex-col items-center py-10 mt-50 px-6 md:px-12 bg-slate-950 text-slate-100" style={{paddingTop:"120px"}}>
-      
+    <main
+      className="min-h-screen w-full flex flex-col items-center py-10 mt-50 px-6 md:px-12 bg-slate-950 text-slate-100"
+      style={{ paddingTop: "120px" }}
+    >
       <article className="max-w-3xl w-full flex flex-col items-center gap-8">
-        
-        {/* Category Tag */}
+        {/* CATEGORY TAG */}
         <span className="px-4 py-1.5 text-xs md:text-sm font-semibold tracking-widest text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full uppercase">
-          {BLOG.tag}
+          {BLOG.tags?.[0] || BLOG.category || "blog"}
         </span>
 
-        {/* Blog Title */}
+        {/* TITLE */}
         <h1 className="glow-text text-4xl md:text-4xl lg:text-4xl font-extrabold text-center leading-tight tracking-tight">
           {BLOG.title}
         </h1>
 
-        {/* Metadata (Date & Read Time) */}
+        {/* META */}
         <div className="flex items-center gap-4 text-sm font-medium text-slate-300">
           <time className="glass px-4 py-1.5 rounded-lg border border-white/10">
-            {BLOG.date}
+            {new Date(BLOG.created_at).toLocaleDateString()}
           </time>
+
           <span className="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+
           <span className="glass px-4 py-1.5 rounded-lg border border-white/10">
-            {BLOG.read}
+            {Math.ceil((BLOG.content?.length || 100) / 200)} min read
           </span>
         </div>
 
-        {/* Featured Image */}
+        {/* IMAGE */}
         <div className="w-full relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 mt-4 group">
-          <Image 
-            src={BLOG.img} 
-            width={1200} 
-            height={600} 
-            className="w-full h-75 md:h-112.5 object-cover transition-transform duration-700 group-hover:scale-105" 
+          <img
+            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${BLOG.image?.replace(/\\/g, "/")}`}
+            width={1200}
+            height={600}
+            className="w-full h-75 md:h-112.5 object-cover transition-transform duration-700 group-hover:scale-105"
             alt={BLOG.title}
-            priority 
+            priority
           />
         </div>
-        
-        {/* Blog Content */}
-        <div className="w-full mt-6 space-y-6 text-lg md:text-xl text-slate-300 leading-relaxed font-light">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel explicabo, ullam repellendus, mollitia commodi dicta dolorum asperiores placeat eligendi eveniet suscipit vitae voluptatem provident quaerat illo aliquam molestias quisquam deserunt.
-          </p>
-          <p>
-            In today's digital age, establishing a strong online presence is no longer just an option for businesses in Nepal—it's a necessity. From bustling tech hubs in Kathmandu to emerging markets across the country, connecting with your audience digitally unlocks unprecedented growth.
-          </p>
-        </div>
 
+        {/* CONTENT */}
+        <div className="w-full mt-6 space-y-6 text-lg md:text-xl text-slate-300 leading-relaxed font-light">
+          <ReactMarkdown>
+            {String(BLOG?.content || "")
+              .replace(/\*\*(.*?)\s+\*\*/g, "**$1**")
+              .trim()}
+          </ReactMarkdown>
+        </div>
       </article>
     </main>
   );
-}
+};
 
 export default BlogPost;

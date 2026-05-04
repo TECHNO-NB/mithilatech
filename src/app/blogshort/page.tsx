@@ -10,14 +10,14 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const page = () => {
-  const [BLOGS, setBlogs] = useState([])
-  const router=useRouter();
+  const [BLOGS, setBlogs] = useState([]);
+  const router=useRouter()
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/blogs/short`
         );
 
         // FIX: parse tags JSON
@@ -90,7 +90,20 @@ const page = () => {
             </h2>
           </div>
 
-     
+          <button
+          onClick={()=>router.push("/blogs")}
+            className="btn-outline"
+            style={{
+              padding: "12px 28px",
+              borderRadius: 8,
+              fontSize: 14,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            View All <ExternalLink size={14} />
+          </button>
         </motion.div>
 
         {/* BLOG GRID */}
@@ -103,7 +116,7 @@ const page = () => {
         >
           {BLOGS.map((b, i) => (
             <motion.div
-            onClick={()=>router.push(`/blog/${b.id}`)}
+             onClick={()=> router.push(`/blog/${b.id}`)}
               key={b.id}
               className="glass"
               initial={{ opacity: 0, y: 30 }}

@@ -3,38 +3,32 @@
 
 import { useEffect, useRef, useState } from "react";
 import GoldButton from "./GoldButton";
-import {
-  Clock,
-  Image,
-  Plus,
-  Save,
-  Search,
-  Trash2,
-  Upload,
-  X,
-} from "lucide-react";
+import { Plus, Save, Trash2, Upload } from "lucide-react";
 import Card from "./Card";
 import InputField from "./InputField";
 import axios from "axios";
 import dynamic from "next/dynamic";
 
-const SimpleMDE = dynamic(
-  () => import("react-simplemde-editor"),
-  { ssr: false }
-);
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 import "easymde/dist/easymde.min.css";
+import Image from "next/image";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface Blog {
   id: number;
   title: string;
-  description: string;
+  short_description: string;
   content: string;
   image?: string;
+  category?: string;
+  tags?: string[];
+  seo_meta_title?: string;
+  seo_meta_description?: string;
+  status?: string;
   created_at?: string;
 }
 
-// ─── API ─────────────────────────────────────────────────────────────────────
 const API = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1`,
 });
@@ -45,8 +39,14 @@ export default function BlogsPanel({ addToast }) {
   const [showForm, setShowForm] = useState(false);
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [short_description, setShortDescription] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
+  const [tags, setTags] = useState(""); // comma input
+  const [seoTitle, setSeoTitle] = useState("");
+  const [seoDesc, setSeoDesc] = useState("");
+  const [status, setStatus] = useState("draft");
+
   const [file, setFile] = useState<File | null>(null);
 
   const [submitting, setSubmitting] = useState(false);
@@ -54,7 +54,7 @@ export default function BlogsPanel({ addToast }) {
 
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // ─── Fetch Blogs ───────────────────────────────────────────────────────────
+  // ─── Fetch Blogs ─────────────────────────
   const fetchBlogs = async () => {
     try {
       const { data } = await API.get("/blogs");
@@ -70,11 +70,11 @@ export default function BlogsPanel({ addToast }) {
     fetchBlogs();
   }, []);
 
-  // ─── Create Blog ───────────────────────────────────────────────────────────
+  // ─── Create Blog ─────────────────────────
   const handleCreate = async () => {
     const token = localStorage.getItem("token");
 
-    if (!title || !content || !description) {
+    if (!title || !content || !short_description) {
       addToast("All fields required", "error");
       return;
     }
@@ -83,9 +83,23 @@ export default function BlogsPanel({ addToast }) {
 
     try {
       const fd = new FormData();
+
       fd.append("title", title);
-      fd.append("description", description);
+      fd.append("short_description", short_description);
       fd.append("content", content);
+      fd.append("category", category);
+      fd.append("seo_meta_title", seoTitle);
+      fd.append("seo_meta_description", seoDesc);
+      fd.append("status", status);
+
+      // convert tags → JSON array
+      const tagArray = tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+
+      fd.append("tags", JSON.stringify(tagArray));
+
       if (file) fd.append("image", file);
 
       await API.post("/blogs", fd, {
@@ -97,9 +111,15 @@ export default function BlogsPanel({ addToast }) {
 
       addToast("Blog created successfully!");
 
+      // reset
       setTitle("");
-      setDescription("");
+      setShortDescription("");
       setContent("");
+      setCategory("");
+      setTags("");
+      setSeoTitle("");
+      setSeoDesc("");
+      setStatus("draft");
       setFile(null);
       setShowForm(false);
 
@@ -111,7 +131,7 @@ export default function BlogsPanel({ addToast }) {
     }
   };
 
-  // ─── Delete Blog ───────────────────────────────────────────────────────────
+  // ─── Delete Blog ─────────────────────────
   const handleDelete = async (id: number) => {
     const token = localStorage.getItem("token");
 
@@ -136,13 +156,7 @@ export default function BlogsPanel({ addToast }) {
   return (
     <div>
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 24,
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 24 }}>
         <div>
           <h3 style={{ color: "#f0ead8" }}>Blog Posts</h3>
           <p style={{ color: "#5a5750", fontSize: 13 }}>
@@ -160,25 +174,49 @@ export default function BlogsPanel({ addToast }) {
         <Card style={{ marginBottom: 24 }}>
           <h4 style={{ color: "#c9a84c" }}>Create Blog</h4>
 
-          <InputField
-            label="Title h1"
-            value={title}
-            onChange={setTitle}
-            required
-          />
+          <InputField label="Title h1" value={title} onChange={setTitle} required />
 
           <InputField
             label="Short Description"
-            value={description}
-            onChange={setDescription}
+            value={short_description}
+            onChange={setShortDescription}
             required
           />
 
+          <InputField label="Category" value={category} onChange={setCategory} />
+
+          <InputField
+            label="Tags (comma separated)"
+            value={tags}
+            onChange={setTags}
+          />
+
+          <InputField
+            label="SEO Meta Title"
+            value={seoTitle}
+            onChange={setSeoTitle}
+          />
+
+          <InputField
+            label="SEO Meta Description"
+            value={seoDesc}
+            onChange={setSeoDesc}
+          />
+
+          {/* Status */}
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            style={{ marginBottom: 16 }}
+          >
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+            <option value="archived">Archived</option>
+          </select>
+
           {/* Markdown Editor */}
           <div style={{ marginBottom: 16 }}>
-            <label style={{ color: "#787470", fontSize: 12 }}>
-              Content
-            </label>
+            <label style={{ color: "#787470", fontSize: 12 }}>Content</label>
             <SimpleMDE value={content} onChange={setContent} />
           </div>
 
@@ -201,12 +239,9 @@ export default function BlogsPanel({ addToast }) {
               ref={fileRef}
               type="file"
               hidden
-              onChange={(e) =>
-                setFile(e.target.files?.[0] || null)
-              }
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
             />
 
-            {/* Preview */}
             {file && (
               <img
                 src={URL.createObjectURL(file)}
@@ -241,8 +276,9 @@ export default function BlogsPanel({ addToast }) {
       ) : (
         filtered.map((blog) => (
           <Card key={blog.id}>
+            <img className="w-50" src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${blog.image}`} />
             <h4>{blog.title}</h4>
-            <p>{blog.description}</p>
+            <p>{blog.short_description}</p>
             <p>{blog.content.slice(0, 100)}...</p>
 
             <GoldButton
