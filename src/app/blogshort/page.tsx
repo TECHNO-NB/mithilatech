@@ -59,7 +59,7 @@ const page = () => {
             <div
               style={{
                 fontSize: 12,
-                color: "#00FF88",
+                color: "#00D4FF",
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
@@ -80,9 +80,8 @@ const page = () => {
               <br />
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00FF88, #00D4FF)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "#00D4FF",
+            
                 }}
               >
                 our blog

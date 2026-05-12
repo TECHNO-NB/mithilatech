@@ -17,7 +17,7 @@ const page = () => {
             <div
               style={{
                 fontSize: 12,
-                color: "#C084FC",
+                color: "#00D4FF",
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
@@ -37,9 +37,8 @@ const page = () => {
               Why Choose{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #C084FC, #FF6B35)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "#00D4FF",
+               
                 }}
               >
                 Mithila tech?

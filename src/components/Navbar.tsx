@@ -42,8 +42,6 @@ export default function Navbar() {
 
   const [activeSection, setActiveSection] = useState("/");
 
-
-
   return (
     <>
       <motion.nav
@@ -56,7 +54,7 @@ export default function Navbar() {
           padding: scrolled ? "12px 25px" : "20px 25px",
           transition: "all 0.4s",
         }}
-        className={scrolled ? "glass" : ""}
+        className="glass-1"
       >
         <div
           style={{
@@ -90,7 +88,7 @@ export default function Navbar() {
                 justifyContent: "center",
               }}
             >
-              <Image src={logo} alt="Logo" className=" rounded-md" />
+              <Image src={logo} alt="Logo" className=" rounded-md border border-black" />
             </div>
             <div>
               <div
@@ -98,7 +96,7 @@ export default function Navbar() {
                   fontSize: 16,
                   fontWeight: 800,
                   letterSpacing: "-0.02em",
-                  color:"white",
+                  color:"black",
                   lineHeight: 1.1,
                 }}
               >
@@ -129,7 +127,7 @@ export default function Navbar() {
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#A0A8B8",
+                  color: "black",
                   fontSize: 14,
                   fontWeight: 600,
                   fontFamily: "'Syne', sans-serif",
@@ -163,7 +161,7 @@ export default function Navbar() {
               style={{
                 background: "none",
                 border: "none",
-                color: "#E8EDF5",
+                color: "black",
                 cursor: "pointer",
                 padding: 8,
               }}

@@ -195,7 +195,7 @@ const page = () => {
           <div
             style={{
               fontSize: 12,
-              color: "#FF6B35",
+              color: "#00D4FF",
               fontWeight: 700,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
@@ -217,9 +217,7 @@ const page = () => {
             <br />
             <span
               style={{
-                background: "linear-gradient(135deg, #FF6B35, #FFD700)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                color: "#00D4FF",
               }}
             >
               Something Great?

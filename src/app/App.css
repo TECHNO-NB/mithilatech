@@ -23,6 +23,11 @@
      scroll-behavior: smooth;
    }
 
+   .glass-1 {
+     background: white;
+     backdrop-filter: blur(20px);
+     border: 1px solid rgba(255, 255, 255, 0.08);
+   }
    .glass {
      background: rgba(255, 255, 255, 0.04);
      backdrop-filter: blur(20px);
@@ -30,14 +35,14 @@
    }
 
    .glow-text {
-     background: linear-gradient(135deg, #00D4FF 0%, #C084FC 50%, #FF6B35 100%);
+     background: #00D4FF;
      -webkit-background-clip: text;
      -webkit-text-fill-color: transparent;
      background-clip: text;
    }
 
    .btn-primary {
-     background: linear-gradient(135deg, #00D4FF, #C084FC);
+     background:  #00D4FF;
      color: #050A14;
      font-weight: 700;
      font-family: 'Syne', sans-serif;

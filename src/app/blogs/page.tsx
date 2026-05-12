@@ -80,9 +80,8 @@ const page = () => {
               <br />
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00FF88, #00D4FF)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "#00D4FF",
+               
                 }}
               >
                 our blog
