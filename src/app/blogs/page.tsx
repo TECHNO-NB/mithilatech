@@ -38,7 +38,7 @@ const page = () => {
   return (
     <section
       id="blogs"
-      style={{ padding: "70px 25px", background: "rgba(255,255,255,0.015)" }}
+      style={{ padding: "90px 25px", background: "rgba(255,255,255,0.015)" }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         {/* HEADER */}

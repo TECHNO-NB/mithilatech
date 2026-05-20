@@ -6,7 +6,7 @@ import {
 
 const page = () => {
   return (
-      <section id="products" style={{ padding: "70px 25px" }}>
+      <section id="products" style={{ padding: "90px 25px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -54,26 +54,63 @@ const page = () => {
             }}
           >
             {[
-              {
-                num: "01",
-                title: "Custom Solutions",
-                desc: "No templates, no shortcuts. Every solution is architected specifically for your business goals.",
-              },
-              {
-                num: "02",
-                title: "Local Expertise",
-                desc: "We understand Nepal's market, culture, and digital landscape better than anyone.",
-              },
-              {
-                num: "03",
-                title: "Post-Launch Support",
-                desc: "We're with you long after launch — monitoring, optimizing, and scaling your digital assets.",
-              },
-              {
-                num: "04",
-                title: "Affordable Excellence",
-                desc: "World-class quality at prices that make sense for Nepali businesses of all sizes.",
-              },
+                        {
+              num: "01",
+              title: "Education Software",
+              desc: "Custom digital solutions for schools, colleges, and training institutes.",
+            },
+            {
+              num: "02",
+              title: "Learning Management System (LMS)",
+              desc: "Smart platforms for online learning, courses, and student engagement.",
+            },
+            {
+              num: "03",
+              title: "School Management System",
+              desc: "Complete software to manage academics, administration, and communication.",
+            },
+            {
+              num: "04",
+              title: "Student Attendance System",
+              desc: "Easy attendance tracking with real-time reports and monitoring.",
+            },
+            {
+              num: "05",
+              title: "Library Management System",
+              desc: "Efficient system to manage books, records, and library operations.",
+            },
+            {
+              num: "06",
+              title: "Customer Relationship Management (CRM)",
+              desc: "Organize leads, customers, and sales processes in one place.",
+            },
+            {
+              num: "07",
+              title: "Business & Enterprise Software",
+              desc: "Scalable software solutions designed for modern business operations.",
+            },
+            {
+              num: "08",
+              title: "Billing & Accounting Software",
+              desc: "Manage invoices, expenses, payments, and financial reporting easily.",
+            },
+            {
+              num: "09",
+              title: "HR & Payroll Management System Employee",
+              desc: "Simplify employee records, payroll, attendance, and HR processes.",
+            },
+            {
+              num: "10",
+              title: "Healthcare Software",
+              desc: "Digital solutions for hospitals, healthcare providers, and patient care.",
+            },
+            {
+              num: "11",
+              title: "Clinic Management Software",
+              desc: "Manage appointments, patient records, billing, and clinic workflows.",
+            },
+
+              
             ].map((item, i) => (
               <motion.div
                 key={i}

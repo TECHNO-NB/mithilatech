@@ -42,7 +42,7 @@ function ContactForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        style={{ textAlign: "center", padding: "40px 0" }}
+        style={{ textAlign: "center", padding: "100px 0" }}
       >
         <CheckCircle
           size={56}

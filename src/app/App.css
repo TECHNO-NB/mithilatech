@@ -2,8 +2,7 @@
 
    * {
      box-sizing: border-box;
-     margin: 0;
-     padding: 0;
+  
    }
 
    ::-webkit-scrollbar {
@@ -23,6 +22,8 @@
      scroll-behavior: smooth;
    }
 
+  
+
    .glass-1 {
      background: white;
      backdrop-filter: blur(20px);
@@ -35,7 +36,7 @@
    }
 
    .glow-text {
-     background: #00D4FF;
+      background: #00D4FF;
      -webkit-background-clip: text;
      -webkit-text-fill-color: transparent;
      background-clip: text;

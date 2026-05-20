@@ -26,6 +26,7 @@ export default function Navbar() {
     "Services",
     "Products",
     "Blogs",
+    "Courses",
     "Contact",
   ];
 
@@ -54,7 +55,7 @@ export default function Navbar() {
           padding: scrolled ? "12px 25px" : "20px 25px",
           transition: "all 0.4s",
         }}
-        className="glass-1"
+        className="bg-white"
       >
         <div
           style={{
@@ -105,7 +106,7 @@ export default function Navbar() {
               <div
                 style={{
                   fontSize: 10,
-                  color: "#00D4FF",
+                  color: "black",
                   fontWeight: 600,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
