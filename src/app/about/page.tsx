@@ -1,7 +1,6 @@
 // @ts-nocheck
 "use client";
-
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 import {
   CheckCircle,
@@ -12,6 +11,9 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react";
+import { useRef } from "react";
+import aboutusimg from "../../../public/pic8.jpeg"
+import Image from "next/image";
 
 const About = () => {
   const features = [
@@ -65,285 +67,62 @@ const About = () => {
     },
   };
 
-  const fadeUp = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
+ function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 36 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
   return (
-    <section
-      id="about"
-      style={{
-        padding: "90px 25px",
-        position: "relative",
-      }}
-    >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{
-          once: true,
-          amount: 0.2,
-        }}
-        className="grid md:grid-cols-2"
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          gap: 80,
-          alignItems: "center",
-        }}
-      >
-        {/* LEFT SIDE */}
-        <motion.div variants={fadeUp}>
-          <motion.div
-            variants={fadeUp}
-            style={{
-              fontSize: 12,
-              color: "#00D4FF",
-              fontWeight: 700,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}
-          >
-            Who We Are
-          </motion.div>
-
-          <motion.h2
-            variants={fadeUp}
-            style={{
-              fontSize: "clamp(2rem, 4vw, 3.5rem)",
-              fontWeight: 800,
-              lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-              marginBottom: 24,
-            }}
-          >
-            Your Trusted Tech
-            <br />
-
-            <span className="glow-text">
-              Partner in Nepal
-            </span>
-          </motion.h2>
-
-          <motion.p
-            variants={fadeUp}
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              color: "#7A8499",
-              fontSize: 17,
-              lineHeight: 1.8,
-              marginBottom: 20,
-            }}
-          >
-            Mithila Tech And I.T. Solutions is a tech company
-            focused on helping businesses grow through smart
-            technology and effective strategy. We combine
-            modern innovation with a deep understanding of
-            business needs to deliver solutions that are
-            practical, scalable, and result-driven.
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              color: "#7A8499",
-              fontSize: 17,
-              lineHeight: 1.8,
-              marginBottom: 40,
-            }}
-          />
-
-          {/* FEATURES */}
-          <motion.div
-            variants={containerVariants}
-          >
-            {features.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                whileHover={{
-                  x: 6,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  marginBottom: 14,
-                }}
-              >
-                <motion.div
-                  animate={{
-                    y: [0, -2, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                  }}
-                >
-                  <item.icon
-                    size={18}
-                    color="#00D4FF"
-                  />
-                </motion.div>
-
-                <span
-                  style={{
-                    fontFamily:
-                      "'DM Sans', sans-serif",
-                    color: "#A0A8B8",
-                    fontSize: 15,
-                  }}
-                >
-                  {item.text}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* RIGHT SIDE */}
-        <motion.div
-          variants={containerVariants}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 16,
-          }}
-        >
-          {cards.map((card, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp}
-              className="glass"
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                borderColor: card.color,
-                boxShadow: `0 10px 30px ${card.color}20`,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 250,
-                damping: 18,
-              }}
-              style={{
-                padding: 28,
-                borderRadius: 16,
-                cursor: "default",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              {/* Glow Effect */}
-              <motion.div
-                animate={{
-                  opacity: [0.2, 0.35, 0.2],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: i * 0.4,
-                }}
-                style={{
-                  position: "absolute",
-                  top: -40,
-                  right: -40,
-                  width: 120,
-                  height: 120,
-                  borderRadius: "50%",
-                  background: `${card.color}15`,
-                  filter: "blur(40px)",
-                }}
-              />
-
-              <motion.div
-                whileHover={{
-                  rotate: 6,
-                  scale: 1.08,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                }}
-                style={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 10,
-                  background: `${card.color}15`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 16,
-                  position: "relative",
-                  zIndex: 2,
-                }}
-              >
-                <card.icon
-                  size={22}
-                  color={card.color}
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 10,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: i * 0.1,
-                }}
-                style={{
-                  fontSize: 22,
-                  fontWeight: 800,
-                  marginBottom: 4,
-                  position: "relative",
-                  zIndex: 2,
-                }}
-              >
-                {card.val}
-              </motion.div>
-
-              <div
-                style={{
-                  fontFamily:
-                    "'DM Sans', sans-serif",
-                  fontSize: 13,
-                  color: "#5A6478",
-                  position: "relative",
-                  zIndex: 2,
-                }}
-              >
-                {card.label}
+     <section id="about" className="py-24 px-6 bg-black text-white">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <FadeUp>
+            <div className="relative">
+              <div className="w-full aspect-3/4 bg-forest-light rounded-sm flex items-center justify-center text-white/20 font-display text-xl italic overflow-hidden">
+                <div className="absolute inset-0 bg-linear-to-br from-forest via-forest-light to-[#4a7a5f]" />
+                <Image src={aboutusimg} width={400} height={500} className=" w-full h-full"  alt="about us pic"/>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
-    </section>
+              <div className="absolute -bottom-8 -right-8 w-[55%] aspect-square bg-gold-pale rounded-sm border-4 border-cream flex items-center justify-center">
+                <div className="text-center">
+                  <p className="font-display text-5xl font-semibold text-forest leading-none">6+</p>
+                  <p className="text-xs tracking-widest uppercase text-muted mt-1 font-medium">Years of Love</p>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.15}>
+            <p className="text-gold text-xs tracking-[0.35em] uppercase font-medium mb-3">About Us</p>
+            <h2 className="font-display text-[#ffd700] leading-tight mb-4" style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}>
+              We Craft Weddings<br />That <em className="italic text-gold">Last Forever</em>
+            </h2>
+            <div className="w-12 h-0.5 bg-gold mb-5" />
+            <p className="text-muted leading-relaxed font-light mb-5 text-[0.95rem]">
+              Founded in the heart of Tilottama, Unique Event was born from a passion for transforming love stories into extraordinary celebrations. We blend traditional Nepali elegance with contemporary design to create weddings that are distinctly yours.
+            </p>
+            <p className="text-muted leading-relaxed font-light text-[0.95rem] mb-8">
+              Every detail — from the first flower arrangement to the final farewell — is orchestrated with care, creativity, and a deep respect for the sacred moments that shape a life together.
+            </p>
+            <div className="flex gap-8">
+              {[["300+", "Weddings"], ["98%", "Happy Couples"], ["50+", "Vendors"]].map(([num, label]) => (
+                <div key={label}>
+                  <p className="font-display text-4xl font-semibold text-forest leading-none">{num}</p>
+                  <p className="text-xs tracking-widest uppercase text-muted mt-1 font-medium">{label}</p>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+        </div>
+      </section>
   );
 };
 

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Code2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import logo from "../../public/mithilatechlogo.jpeg";
+import logo from "../../public/logo.jpeg";
 import Image from "next/image";
 
 // ── NAV ───────────────────────────────────────────────────────────────────
@@ -20,22 +20,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const NAV_LINKS = [
-    "Home",
-    "About",
-    "Services",
-    "Products",
-    "Blogs",
-    "Courses",
-    "Contact",
-  ];
+  const navLinks = ["About", "Services", "Gallery", "Testimonials", "Contact"];
 
   const handleNavigate = (link: string) => {
     const path = link.toLocaleLowerCase();
     if (path === "home") {
       navigate.push("/");
       setMenuOpen(false)
-    } else {
+    }else if(path==="services"){
+      navigate.push("/weddingservices")
+      setMenuOpen(false)
+} 
+else if(path==="gallery"){
+      navigate.push("/memories")
+      setMenuOpen(false)
+} 
+else {
       navigate.push(`/${path}`);
       setMenuOpen(false)
     }
@@ -45,190 +45,45 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          padding: scrolled ? "12px 25px" : "20px 25px",
-          transition: "all 0.4s",
-        }}
-        className="bg-white"
-      >
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <motion.div
-            
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              cursor: "pointer",
-            }}
-            onClick={() => navigate.push("/")}
-          >
-            <div
-              style={{
-                width: 36,
-                height: 36,
-                background: "linear-gradient(135deg, #00D4FF, #C084FC)",
-                borderRadius: 8,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image src={logo} alt="Logo" className=" rounded-md border border-black" />
-            </div>
-            <div>
-              <div
-                style={{
-                  fontSize: 16,
-                  fontWeight: 800,
-                  letterSpacing: "-0.02em",
-                  color:"black",
-                  lineHeight: 1.1,
-                }}
-              >
-                Mithila 
+    <nav className={`fixed top-0 inset-x-0 z-50 transition-all text-black  duration-500 ${scrolled ? "bg-white " : "bg-white"}`}>
+           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+              <div onClick={()=>handleNavigate("home")} className="flex gap-2 items-center justify-center">
+               <Image src={logo} width={60} height={60} className=" rounded-md" alt="logo"/>
+             <span className="font-display text-2xl font-light text-gold tracking-widest cursor-pointer text-[#ffd900]" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+               Unique <em className="not-italic font-semibold">Event</em>
+             </span>
               </div>
-              <div
-                style={{
-                  fontSize: 10,
-                  color: "black",
-                  fontWeight: 600,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Tech & IT Solutions
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="hide-mobile" style={{ display: "flex", gap: 8 }}>
-            {NAV_LINKS.map((link, i) => (
-              <motion.button
-                key={link}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.07 }}
-                onClick={() => handleNavigate(link)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "black",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  fontFamily: "'Syne', sans-serif",
-                  cursor: "pointer",
-                  padding: "8px 14px",
-                  borderRadius: 6,
-                  transition: "all 0.2s",
-                }}
-                whileHover={{
-                  color: "#E8EDF5",
-                  background: "rgba(255,255,255,0.06)",
-                }}
-              >
-                {link}
-              </motion.button>
-            ))}
-          </div>
-
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-            <motion.button
-              className="btn-primary hide-mobile"
-              onClick={() => handleNavigate("contact")}
-              style={{ padding: "10px 24px", borderRadius: 8, fontSize: 14 }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Get Started
+             <ul className="hidden md:flex gap-8 list-none">
+               {navLinks.map(l => (
+                 <li key={l}>
+                   <button onClick={() => handleNavigate(l)} className="text-black hover:text-gold text-xs tracking-widest uppercase font-medium transition-colors duration-300 cursor-pointer bg-transparent border-none">
+                     {l}
+                   </button>
+                 </li>
+               ))}
+             </ul>
+             <button onClick={() => navigate.push("contact")} className="hidden md:block bg-[#ffd700]/90 hover:bg-gold-light text-white text-xs tracking-widest uppercase px-5 py-2.5 cursor-pointer rounded-sm transition-all duration-300 hover:-translate-y-0.5">
+               Get a Quote
+             </button>
+             <button className="md:hidden text-black" onClick={() => setMenuOpen(true)}>
+               <Menu size={24} />
+             </button>
+           </div>
+         </nav>
+          {menuOpen && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 bg-forest z-50 flex flex-col items-center justify-center gap-8">
+          <button className="absolute top-6 right-6 text-black" onClick={() => setMenuOpen(false)}>
+            <X size={28} />
+          </button>
+          {navLinks.map((l, i) => (
+            <motion.button key={l} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
+              onClick={() => handleNavigate(l)} className="font-display text-4xl font-light text-black hover:text-gold transition-colors cursor-pointer bg-transparent border-none">
+              {l}
             </motion.button>
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              style={{
-                background: "none",
-                border: "none",
-                color: "black",
-                cursor: "pointer",
-                padding: 8,
-              }}
-            >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </motion.nav>
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 99,
-              background: "#050A14",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 24,
-            }}
-          >
-            {NAV_LINKS.map((link, i) => (
-              <motion.button
-                key={link}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.07 }}
-                onClick={() => handleNavigate(link)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#E8EDF5",
-                  fontSize: 28,
-                  fontWeight: 800,
-                  fontFamily: "'Syne', sans-serif",
-                  cursor: "pointer",
-                }}
-              >
-                {link}
-              </motion.button>
-            ))}
-            <motion.button
-              className="btn-primary"
-              onClick={() => handleNavigate("contact")}
-              style={{
-                padding: "14px 40px",
-                borderRadius: 10,
-                fontSize: 16,
-                marginTop: 16,
-              }}
-            >
-              Get Started
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+        </motion.div>
+      )}
+
     </>
   );
 }
