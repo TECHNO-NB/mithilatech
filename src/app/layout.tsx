@@ -1,105 +1,22 @@
-// @ts-nocheck
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LayoutWrapper from "@/components/LayoutWrapper";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "Mithila Tech & IT Solutions",
+  title: "Mithila Tech & IT Solutions | Transforming Ideas Into Digital Success",
   description:
-    "Mithila Tech & IT Solutions provides modern web development, mobile apps, UI/UX design, and digital solutions to grow your business online.",
-
-  keywords: [
-    "Mithilatech",
-    "IT Solutions",
-    "web development",
-    "software company",
-    "UI UX design",
-    "mobile app development",
-    "Nepal IT company",
-    "Next.js development",
-    "React developer",
-    "modern websites"
-  ],
-
-  authors: [{ name: "Mithila Tech" }],
-  creator: "Mithila Tech & IT Solutions",
-  publisher: "Mithilatech",
-
-  metadataBase: new URL("https://mimthilatech.com"),
-
-  openGraph: {
-    title: "Mithila Tech & IT Solutions",
-    description:
-      "We build modern, fast, and scalable websites, apps, and digital products.",
-    url: "https://mimthilatech.com",
-    siteName: "Mithila Tech & IT Solutions",
-    images: [
-      {
-        url: "/mithilatechlogo.jpeg",
-        width: 1200,
-        height: 630,
-        alt: "Mithilatech Preview"
-      }
-    ],
-    locale: "en_US",
-    type: "website"
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Mithila Tech & IT Solutions",
-    description:
-      "Modern web development, apps, and UI/UX solutions.",
-    images: ["/mithilatechlogo.jpeg"]
-  },
-
-  icons: {
-    icon: "/mithilatechlogo.jpeg",
-    shortcut: "/mithilatechlogo.jpeg",
-    apple: "/mithilatechlogo.jpeg"
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1
-    }
-  }
+    "Mithila Tech & IT Solutions helps businesses grow online with innovative IT solutions, creative design and result-driven digital marketing.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <LayoutWrapper>
-          {children}
+    <html lang="en" className="h-full scroll-smooth">
+      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white antialiased">
+        <Navbar/>
+        {children}
         <Footer/>
-        </LayoutWrapper>
-        </body>
+      </body>
     </html>
   );
 }

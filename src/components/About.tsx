@@ -58,7 +58,7 @@ export default function About() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="relative aspect-4/3 overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-surface-2 to-black"
+          className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br from-surface-2 to-black"
         >
           <div className="dot-grid absolute inset-0 opacity-20" />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">

@@ -1,392 +1,220 @@
-// @ts-nocheck
 "use client";
-import React, { useState } from "react";
+
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  CheckCircle,
-  Mail,
-  MapPin,
-  Phone,
-  StarHalf,
-} from "lucide-react";
-import axios from "axios";
+import { Globe, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
 
-function ContactForm() {
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
-  const [sent, setSent] = useState(false);
+const MAP_LAT = 27.6737;
+const MAP_LNG = 85.4114;
+const MAP_DELTA = 0.006;
 
-  const handleSubmit = async () => {
-    if (!form.fullName || !form.email || !form.service || !form.message) return;
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${
+  MAP_LNG - MAP_DELTA
+}%2C${MAP_LAT - MAP_DELTA}%2C${MAP_LNG + MAP_DELTA}%2C${
+  MAP_LAT + MAP_DELTA
+}&layer=mapnik&marker=${MAP_LAT}%2C${MAP_LNG}`;
 
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/contacts`,
-      {
-        ...form,
-      },
-    );
+const mapLink = `https://www.openstreetmap.org/?mlat=${MAP_LAT}&mlon=${MAP_LNG}#map=16/${MAP_LAT}/${MAP_LNG}`;
 
-    if (res.data) {
-      setSent(true);
-    }
-  };
-
-  if (sent)
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        style={{ textAlign: "center", padding: "100px 0" }}
-      >
-        <CheckCircle
-          size={56}
-          color="#00FF88"
-          style={{ margin: "0 auto 20px" }}
-        />
-        <h3 style={{ fontSize: 24, fontWeight: 800, marginBottom: 12 }}>
-          Message Sent!
-        </h3>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#7A8499" }}>
-          We'll get back to you within 24 hours.
-        </p>
-        <button
-          onClick={() => {
-            setSent(false);
-            setForm({
-              fullName: "",
-              email: "",
-              phone: "",
-              service: "",
-              message: "",
-            });
-          }}
-          style={{
-            marginTop: 24,
-            background: "none",
-            border: "1px solid rgba(255,255,255,0.15)",
-            color: "#E8EDF5",
-            padding: "10px 24px",
-            borderRadius: 8,
-            cursor: "pointer",
-            fontFamily: "'Syne', sans-serif",
-            fontWeight: 600,
-            fontSize: 14,
-          }}
-        >
-          Send Another
-        </button>
-      </motion.div>
-    );
-
-  const inputStyle = {
-    width: "100%",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    borderRadius: 10,
-    padding: "14px 18px",
-    color: "#E8EDF5",
-    fontSize: 15,
-    fontFamily: "'DM Sans', sans-serif",
-    outline: "none",
-    transition: "border 0.2s",
-    boxSizing: "border-box",
-  };
-
+export default function Contact() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-      <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 8 }}>
-        Send us a message
-      </h3>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}>
-        <input
-          style={inputStyle}
-          placeholder="Your Name"
-          value={form.fullName}
-          onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-          onFocus={(e) => (e.target.style.borderColor = "#00D4FF")}
-          onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-        />
-        <input
-          style={inputStyle}
-          placeholder="Email Address"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          onFocus={(e) => (e.target.style.borderColor = "#00D4FF")}
-          onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-        />
-      </div>
-      <input
-        style={inputStyle}
-        placeholder="Phone / WhatsApp"
-        value={form.phone}
-        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-        onFocus={(e) => (e.target.style.borderColor = "#00D4FF")}
-        onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-      />
-      <select
-        onChange={(e) => setForm({ ...form, service: e.target.value })}
-        style={{ ...inputStyle, cursor: "pointer" }}
-      >
-        {[
-          "Select a Service",
-          "Website Development",
-          "App Development",
-          "SEO Optimization",
-          "Digital Marketing",
-          "Web Hosting",
-          "Custom Software",
-        ].map((o) => (
-          <option key={o} value={o} style={{ background: "#0D1421" }}>
-            {o}
-          </option>
-        ))}
-      </select>
-      <textarea
-        style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
-        placeholder="Tell us about your project..."
-        value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
-        onFocus={(e) => (e.target.style.borderColor = "#00D4FF")}
-        onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-      />
-      <motion.button
-        className="btn-primary"
-        onClick={handleSubmit}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        style={{
-          padding: "16px 32px",
-          borderRadius: 10,
-          fontSize: 16,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 10,
-          width: "100%",
-        }}
-      >
-        Send Message <ArrowRight size={18} />
-      </motion.button>
-    </div>
-  );
-}
+    <section id="contact" className="relative overflow-hidden py-20 lg:py-28">
+      {/* Modern decorative elements */}
+      <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-purple-500/5 blur-3xl" />
+      <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-blue-500/5 blur-3xl" />
 
-const page = () => {
-  const [svgIcons, setSvgIcons] = useState([
-    {'icons':'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>','href':'https://www.instagram.com/yoursmithila2025/'},
-    {'icons':'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>','href':'https://www.facebook.com/profile.php?id=61585387076986'},
-    {'icons':'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16.6 14c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.2-.5-.5-1-1.1-1.4-1.7-.1-.2 0-.4.1-.5s.2-.3.4-.4c.1-.1.2-.3.2-.4.1-.1.1-.3 0-.4S9.7 8.5 9.5 8c-.1-.7-.3-.7-.5-.7h-.5c-.2 0-.5.2-.6.3Q7 8.5 7 9.7c.1.9.4 1.8 1 2.6 1.1 1.6 2.5 2.9 4.2 3.7.5.2.9.4 1.4.5.5.2 1 .2 1.6.1.7-.1 1.3-.6 1.7-1.2.2-.4.2-.8.1-1.2zm2.5-9.1C15.2 1 8.9 1 5 4.9c-3.2 3.2-3.8 8.1-1.6 12L2 22l5.3-1.4c1.5.8 3.1 1.2 4.7 1.2 5.5 0 9.9-4.4 9.9-9.9.1-2.6-1-5.1-2.8-7m-2.7 14c-1.3.8-2.8 1.3-4.4 1.3-1.5 0-2.9-.4-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3c-2.4-4-1.2-9 2.7-11.5S16.6 3.7 19 7.5c2.4 3.9 1.3 9-2.6 11.4"></path></svg>','href':'https://wa.me/9779829705977'},
-  ]);
-  return (
-    <section id="contact" style={{ padding: "70px 25px" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <div className="container-px relative mx-auto max-w-7xl">
+        {/* Header with modern flair */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          style={{ textAlign: "center", marginBottom: 72 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-2xl text-center"
         >
-          <div
-            style={{
-              fontSize: 12,
-              color: "#00D4FF",
-              fontWeight: 700,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}
-          >
-            Get In Touch
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-purple-400 backdrop-blur-sm">
+            <Sparkles className="h-3.5 w-3.5" />
+            Get in touch
           </div>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 4vw, 3.5rem)",
-              fontWeight: 800,
-              lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-              marginBottom: 16,
-            }}
-          >
-            Ready to Build
+          <h2 className="mt-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl">
+            Let's Create Something
             <br />
-            <span
-              style={{
-                color: "#00D4FF",
-              }}
-            >
-              Something Great?
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Amazing Together
             </span>
           </h2>
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              color: "#7A8499",
-              fontSize: 17,
-            }}
-          >
-            Reach out and let's discuss your project.
+          <p className="mt-4 text-sm leading-relaxed text-white/60 sm:text-base">
+            Reach out and our team will get back to you within one business day.
           </p>
         </motion.div>
 
-        <div
-          className=" grid md:grid-cols-2"
-          style={{
-            gap: 48,
-            alignItems: "start",
-          }}
-        >
+        <div className="mt-14 grid gap-8 lg:grid-cols-5 lg:gap-10">
+          {/* Left: Contact Info + Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ display: "flex", flexDirection: "column", gap: 24 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-3"
           >
-            {[
-              {
-                icon: MapPin,
-                label: "Address",
-                val: "Suryabinayak, Bhaktapur, Nepal",
-                color: "#FF6B35",
-              },
-              {
-                icon: Phone,
-                label: "Phone / WhatsApp",
-                val: "+977 9829705977",
-                color: "#00D4FF",
-                href: "https://wa.me/9779829705977",
-              },
-              {
-                icon: Mail,
-                label: "Email",
-                val: "info@mithilatechsolutions.com",
-                color: "#C084FC",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="glass"
-                whileHover={{ x: 6, borderColor: item.color + "44" }}
-                style={{
-                  padding: "24px 28px",
-                  borderRadius: 16,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 20,
-                  transition: "all 0.3s",
-                  cursor: item.href ? "pointer" : "default",
-                }}
-                onClick={() => item.href && window.open(item.href, "_blank")}
-              >
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 12,
-                    background: `${item.color}15`,
-                    border: `1px solid ${item.color}25`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8">
+              {/* Subtle gradient overlay */}
+              <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-purple-500/10 blur-2xl" />
+
+              <div className="relative">
+                {/* Contact details with modern cards */}
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {[
+                    { icon: MapPin, text: "Sallaghari, Bhaktapur, Nepal" },
+                    { icon: Phone, text: "982-9705977", href: "tel:+9779829705977" },
+                    { icon: Phone, text: "986-3007234", href: "tel:+9779863007234" },
+                    { icon: Mail, text: "info@mithilatech.com", href: "mailto:info@mithilatech.com" },
+                    { icon: Globe, text: "www.mithilatech.com", href: "https://www.mithilatech.com" },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      className="flex items-center gap-3 rounded-2xl border border-white/5 bg-white/5 px-4 py-3 backdrop-blur-sm transition-all hover:border-purple-500/30 hover:bg-white/10"
+                    >
+                      <item.icon className="h-4 w-4 shrink-0 text-purple-400" />
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          target={item.icon === Globe ? "_blank" : undefined}
+                          rel="noopener noreferrer"
+                          className="text-sm text-white/80 transition-colors hover:text-purple-400"
+                        >
+                          {item.text}
+                        </a>
+                      ) : (
+                        <span className="text-sm text-white/80">{item.text}</span>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Modern Form */}
+                <form
+                  onSubmit={(e) => e.preventDefault()}
+                  className="mt-8 space-y-4 border-t border-white/10 pt-8"
                 >
-                  <item.icon size={20} color={item.color} />
-                </div>
-                <div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: "#5A6478",
-                      fontWeight: 600,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {item.label}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: 16,
-                      color: "#C8D0DC",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {item.val}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-
-            <motion.div
-              className="glass"
-              whileHover={{ borderColor: "rgba(0,212,255,0.3)" }}
-              style={{
-                padding: "24px 28px",
-                borderRadius: 16,
-                transition: "all 0.3s",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 13,
-                  color: "#5A6478",
-                  fontWeight: 600,
-                  marginBottom: 16,
-                }}
-              >
-                FOLLOW US
-              </div>
-              <div style={{ display: "flex", gap: 12 }}>
-                {svgIcons?.map((Icon, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ y: -4, background: "rgba(0,212,255,0.15)" }}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 10,
-                      background: "rgba(255,255,255,0.05)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      cursor: "pointer",
-                      transition: "all 0.3s",
-                    }}
-                  >
-                    <a  href={Icon.href}>
-
-                    <div
-                      className="flex justify-center items-center"
-                      dangerouslySetInnerHTML={{ __html: Icon.icons }}
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="group relative">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        required
+                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
                       />
-                      </a>
-                  </motion.div>
-                ))}
+                      <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+                    </div>
+                    <div className="group relative">
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email"
+                        required
+                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                      />
+                      <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+                    </div>
+                  </div>
+                  <div className="group relative">
+                    <input
+                      type="text"
+                      name="subject"
+                      placeholder="Subject"
+                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                    />
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+                  </div>
+                  <div className="group relative">
+                    <textarea
+                      name="message"
+                      placeholder="Your Message"
+                      rows={4}
+                      required
+                      className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                    />
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40"
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      Send Message
+                      <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                    <div className="absolute inset-0 -z-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 transition-opacity group-hover:opacity-100" />
+                  </motion.button>
+                </form>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
 
+          {/* Right: Map with modern styling */}
           <motion.div
-            className="glass md:px-11 py-11"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            style={{ padding: "44px 25px", borderRadius: 24 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-2"
           >
-            <ContactForm />
+            <div className="group relative h-full min-h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl lg:min-h-[500px]">
+              {/* Map with subtle overlay */}
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+
+              <iframe
+                title="Mithila Tech & IT Solutions location map"
+                src={mapSrc}
+                className="h-full w-full grayscale-[10%] contrast-[1.05] transition-all duration-700 group-hover:scale-105"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              {/* Map overlay with location pin */}
+              <div className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
+                <div className="relative">
+                  <div className="absolute -inset-4 animate-ping rounded-full bg-purple-500/30" />
+                  <div className="absolute -inset-2 rounded-full bg-purple-500/20" />
+                  <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl shadow-purple-500/30">
+                    <MapPin className="h-5 w-5 text-white" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Action button */}
+              <motion.a
+                href={mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="absolute bottom-4 right-4 z-20 flex items-center gap-2 rounded-2xl bg-black/60 px-5 py-2.5 text-xs font-semibold text-white backdrop-blur-xl transition-all hover:bg-black/80"
+              >
+                <MapPin className="h-3.5 w-3.5 text-purple-400" />
+                View Larger Map
+              </motion.a>
+
+              {/* Decorative badge */}
+              <div className="absolute left-4 top-4 z-20 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/60 backdrop-blur-md">
+                <span className="flex items-center gap-1.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                  </span>
+                  Open now
+                </span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
   );
-};
-
-export default page;
+}

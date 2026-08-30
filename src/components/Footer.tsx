@@ -1,140 +1,116 @@
-// @ts-nocheck
-"use client";
-import React from "react";
+import { MapPin, Phone, Mail, Globe, ArrowUp, Zap } from "lucide-react";
+import { footerLinks } from "@/data/site";
+import { SocialFacebook, SocialInstagram, SocialLinkedIn, SocialYoutube } from "@/components/SocialIcons";
 
-import logo from "../../public/mithilatechlogo.jpeg";
-import Image from "next/image";
-import whatsapp from "../../public/whatsapp.png";
-import { useRouter } from "next/navigation";
+const socials = [
+  { icon: SocialFacebook, label: "Facebook" },
+  { icon: SocialInstagram, label: "Instagram" },
+  { icon: SocialLinkedIn, label: "LinkedIn" },
+  { icon: SocialYoutube, label: "YouTube" },
+];
 
-const NAV_LINKS = ["Home", "About", "Services", "Products", "Blogs", "Contact"];
-
-
-
-const Footer = () => {
-  const navigate =useRouter()
-  const handleNavigate = (link: string) => {
-    const path = link.toLocaleLowerCase();
-    if (path === "home") {
-      navigate.push("/");
-    
-    } else {
-      navigate.push(`/${path}`);
-    }
-  };
+export default function Footer() {
   return (
-    <footer
-      style={{
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        padding: "48px 25px 32px",
-        background: "rgba(0,0,0,0.3)",
-      }}
-    >
-      <div className="fixed bottom-6 right-6 z-50">
-        <a
-          href="https://wa.me/9779849307841"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block transition-transform hover:scale-110 active:scale-95"
-        >
-          <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
-          <Image
-            src={whatsapp}
-            alt="WhatsApp Support"
-            className="w-10 h-10 drop-shadow-lg relative z-10"
-          />
-        </a>
-      </div>
-
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: 24,
-            marginBottom: 32,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div
-              style={{
-                width: 32,
-                height: 32,
-                background: "linear-gradient(135deg, #00D4FF, #C084FC)",
-                borderRadius: 8,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image src={logo} alt="Logo" className=" rounded-md" />
-            </div>
-            <div>
-              <div style={{ fontSize: 15, fontWeight: 800 }}>
-                Mithila Tech & IT Solutions
-              </div>
-              <div style={{ fontSize: 10, color: "#5A6478" }}>
-                Suryabinayak, Bhaktapur, Nepal
-              </div>
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-            {NAV_LINKS.map((l) => (
-              <button
-                key={l}
-                onClick={() => handleNavigate(l)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#5A6478",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  fontFamily: "'Syne', sans-serif",
-                  cursor: "pointer",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "#E8EDF5")}
-                onMouseLeave={(e) => (e.target.style.color = "#5A6478")}
+    <footer id="contact" className="mt-16 border-t border-white/5 bg-surface/60">
+      <div className="container-px grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Brand */}
+        <div>
+          <a href="#home" className="flex items-center gap-2.5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-background">
+              <Zap className="h-5 w-5" fill="currentColor" strokeWidth={0} />
+            </span>
+            <span className="leading-tight">
+              <span className="block text-lg font-extrabold tracking-wide text-white">
+                MITHILA
+              </span>
+              <span className="block text-[10px] font-medium tracking-[0.2em] text-muted">
+                TECH &amp; IT SOLUTIONS
+              </span>
+            </span>
+          </a>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+            We provide innovative IT solutions to help businesses grow online
+            and achieve long-term success.
+          </p>
+          <div className="mt-5 flex gap-3">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href="#"
+                aria-label={s.label}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-muted transition-colors hover:border-accent hover:text-accent"
               >
-                {l}
-              </button>
+                <s.icon className="h-4 w-4" />
+              </a>
             ))}
           </div>
         </div>
-        <div
-          style={{
-            borderTop: "1px solid rgba(255,255,255,0.05)",
-            paddingTop: 24,
-            display: "flex",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: 12,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 13,
-              color: "#3A4258",
-            }}
-          >
-            © 2026 Mithila Tech & IT Solutions. All rights reserved.
+
+        {/* Quick links */}
+        <div>
+          <h4 className="text-sm font-bold uppercase tracking-wide text-white">Quick Links</h4>
+          <ul className="mt-4 space-y-2.5">
+            {footerLinks.quickLinks.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className="text-sm text-muted hover:text-accent">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Services */}
+        <div>
+          <h4 className="text-sm font-bold uppercase tracking-wide text-white">Our Services</h4>
+          <ul className="mt-4 space-y-2.5">
+            {footerLinks.services.map((label) => (
+              <li key={label}>
+                <a href="#services" className="text-sm text-muted hover:text-accent">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact info */}
+        <div>
+          <h4 className="text-sm font-bold uppercase tracking-wide text-white">Contact Info</h4>
+          <ul className="mt-4 space-y-3.5">
+            <li className="flex items-start gap-3 text-sm text-muted">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              Sallaghari, Bhaktapur, Bagmati, Nepal
+            </li>
+            <li className="flex items-center gap-3 text-sm text-muted">
+              <Phone className="h-4 w-4 shrink-0 text-accent" />
+               9829705977
+            </li>
+            <li className="flex items-center gap-3 text-sm text-muted">
+              <Mail className="h-4 w-4 shrink-0 text-accent" />
+              info@mithilatechsolutions.com
+            </li>
+            <li className="flex items-center gap-3 text-sm text-muted">
+              <Globe className="h-4 w-4 shrink-0 text-accent" />
+              mithilatechsolutions.com
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/5">
+        <div className="container-px flex flex-col items-center justify-between gap-3 py-6 sm:flex-row">
+          <p className="text-xs text-muted">
+            © 2026 Mithila Tech &amp; IT Solutions Pvt. Ltd. All Rights Reserved.
           </p>
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 13,
-              color: "#3A4258",
-            }}
+          <a
+            href="#home"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 hover:text-accent"
           >
-            Made with ♥ in Bhaktapur, Nepal
-          </p>
+            Back to Top <ArrowUp className="h-3.5 w-3.5" />
+          </a>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
