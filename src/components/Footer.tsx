@@ -37,7 +37,7 @@ export default function Footer() {
             {socials.map((s) => (
               <a
                 key={s.label}
-                href="#"
+                href="/"
                 aria-label={s.label}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-muted transition-colors hover:border-accent hover:text-accent"
               >
