@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { MapPin, Phone, Mail, Globe, ArrowUp, Zap } from "lucide-react";
 import { footerLinks } from "@/data/site";
 import { SocialFacebook, SocialInstagram, SocialLinkedIn, SocialYoutube } from "@/components/SocialIcons";

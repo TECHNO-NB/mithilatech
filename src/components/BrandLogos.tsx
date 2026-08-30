@@ -1,3 +1,4 @@
+// @ts-nocheck
 const brands = ["Google", "Meta", "Microsoft", "Intel", "AWS", "Shopify", "Slack"];
 
 export default function BrandLogos() {

@@ -1,3 +1,5 @@
+"use client"
+
 import Hero from "@/components/Hero";
 import BrandLogos from "@/components/BrandLogos";
 import Services from "@/components/Services";

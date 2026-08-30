@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Mithila Tech & IT Solutions | Transforming Ideas Into Digital Success",
   description:
     "Mithila Tech & IT Solutions helps businesses grow online with innovative IT solutions, creative design and result-driven digital marketing.",
+    icons:{
+      icon:"/mithilatechlogo.jpeg"
+    }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
