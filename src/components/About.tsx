@@ -31,7 +31,7 @@ export default function About() {
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base">
             Mithila Tech &amp; IT Solutions Pvt. Ltd. is a leading IT company
-            based in Suryabinayak, Bhaktapur. We provide innovative solutions
+            based in Sallaghari, Bhaktapur. We provide innovative solutions
             in Web &amp; App Development, Digital Marketing, Graphic Design
             and IT Training.
           </p>
