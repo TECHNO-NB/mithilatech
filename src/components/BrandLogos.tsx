@@ -9,7 +9,38 @@ const brands = [
   { name: "POOJALAYA", logo: "/logos/poojalaya.png" },
   { name: "Dermaglow RN", logo: "/logos/dermaglow-rn.png" },
   { name: "HERO MOTORS", logo: "/logos/hero-motors.png" },
+
+  // New brands
+  {
+    name: "Kasthamandap College of Management",
+    logo: "/logos/kasthamandap-college-management.png",
+  },
+  {
+    name: "Nepal Kasthamandap College",
+    logo: "/logos/nepal-kasthamandap-college.png",
+  },
+  {
+    name: "Royal Bali Resort",
+    logo: "/logos/royal-bali-resort.png",
+  },
+  {
+    name: "Dragon Academy",
+    logo: "/logos/dragon-academy.png",
+  },
+  {
+    name: "TARA Ayurvedic",
+    logo: "/logos/tara-ayurvedic.png",
+  },
+  {
+    name: "Arbachin Bhumi",
+    logo: "/logos/arbachin-bhumi.png",
+  },
+  {
+    name: "Hotel Mid Point",
+    logo: "/logos/hotel-mid-point.png",
+  },
 ];
+
 
 export default function BrandLogos() {
   const marqueeRef = useRef<HTMLDivElement>(null);
