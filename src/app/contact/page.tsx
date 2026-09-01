@@ -1,6 +1,8 @@
 // @ts-nocheck
 "use client";
 
+import { useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { Globe, Mail, MapPin, Phone, Send, Sparkles } from "lucide-react";
 
@@ -17,6 +19,49 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${
 const mapLink = `https://www.openstreetmap.org/?mlat=${MAP_LAT}&mlon=${MAP_LNG}#map=16/${MAP_LAT}/${MAP_LNG}`;
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setStatus("");
+    setStatusType("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await axios.post("/api/contact", data);
+
+      setStatus(
+        response.data?.message || "Your message has been sent successfully!"
+      );
+      setStatusType("success");
+
+      form.reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      setStatus(
+        error?.response?.data?.error ||
+          "Failed to send your message. Please try again."
+      );
+      setStatusType("error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="relative overflow-hidden py-20 lg:py-28">
       {/* Modern decorative elements */}
@@ -36,15 +81,18 @@ export default function Contact() {
             <Sparkles className="h-3.5 w-3.5" />
             Get in touch
           </div>
-          <h2 className="mt-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl">
+
+          <h2 className="mt-4 bg-linear-to-r from-white to-white/70 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl">
             Let's Create Something
             <br />
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Amazing Together
             </span>
           </h2>
+
           <p className="mt-4 text-sm leading-relaxed text-white/60 sm:text-base">
-            Reach out and our team will get back to you within one business day.
+            Reach out and our team will get back to you within one business
+            day.
           </p>
         </motion.div>
 
@@ -58,18 +106,32 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8">
-              {/* Subtle gradient overlay */}
+              {/* Subtle linear overlay */}
               <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-purple-500/10 blur-2xl" />
 
               <div className="relative">
                 {/* Contact details with modern cards */}
                 <div className="grid gap-3 sm:grid-cols-2">
                   {[
-                    { icon: MapPin, text: "Sallaghari, Bhaktapur, Nepal" },
-                    { icon: Phone, text: "982-9705977", href: "tel:+9779829705977" },
-                    // { icon: Phone, text: "986-3007234", href: "tel:+9779863007234" },
-                    { icon: Mail, text: "info@mithilatechsolutions.com", href: "mailto:info@mithilatechsolutions.com" },
-                    { icon: Globe, text: "mithilatechsolutions.com", href: "https://www.mithilatechsolutions.com" },
+                    {
+                      icon: MapPin,
+                      text: "Sallaghari, Bhaktapur, Nepal",
+                    },
+                    {
+                      icon: Phone,
+                      text: "982-9705977",
+                      href: "tel:+9779829705977",
+                    },
+                    {
+                      icon: Mail,
+                      text: "info@mithilatechsolutions.com",
+                      href: "mailto:info@mithilatechsolutions.com",
+                    },
+                    {
+                      icon: Globe,
+                      text: "mithilatechsolutions.com",
+                      href: "https://www.mithilatechsolutions.com",
+                    },
                   ].map((item, idx) => (
                     <motion.div
                       key={idx}
@@ -77,17 +139,22 @@ export default function Contact() {
                       className="flex items-center gap-3 rounded-2xl border border-white/5 bg-white/5 px-4 py-3 backdrop-blur-sm transition-all hover:border-purple-500/30 hover:bg-white/10"
                     >
                       <item.icon className="h-4 w-4 shrink-0 text-purple-400" />
+
                       {item.href ? (
                         <a
                           href={item.href}
-                          target={item.icon === Globe ? "_blank" : undefined}
+                          target={
+                            item.icon === Globe ? "_blank" : undefined
+                          }
                           rel="noopener noreferrer"
                           className="text-sm text-white/80 transition-colors hover:text-purple-400"
                         >
                           {item.text}
                         </a>
                       ) : (
-                        <span className="text-sm text-white/80">{item.text}</span>
+                        <span className="text-sm text-white/80">
+                          {item.text}
+                        </span>
                       )}
                     </motion.div>
                   ))}
@@ -95,7 +162,7 @@ export default function Contact() {
 
                 {/* Modern Form */}
                 <form
-                  onSubmit={(e) => e.preventDefault()}
+                  onSubmit={handleSubmit}
                   className="mt-8 space-y-4 border-t border-white/10 pt-8"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -105,52 +172,89 @@ export default function Contact() {
                         name="name"
                         placeholder="Your Name"
                         required
-                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                        disabled={loading}
+                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                       />
+
                       <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
                     </div>
+
                     <div className="group relative">
                       <input
                         type="email"
                         name="email"
                         placeholder="Your Email"
                         required
-                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                        disabled={loading}
+                        className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                       />
-                      <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+
+                      <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
                     </div>
                   </div>
+
                   <div className="group relative">
                     <input
                       type="text"
                       name="subject"
                       placeholder="Subject"
-                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                      disabled={loading}
+                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                     />
-                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
                   </div>
+
                   <div className="group relative">
                     <textarea
                       name="message"
                       placeholder="Your Message"
                       rows={4}
                       required
-                      className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                      disabled={loading}
+                      className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                     />
-                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
                   </div>
 
+                  {/* Status Message */}
+                  {status && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`rounded-2xl border px-4 py-3 text-sm ${
+                        statusType === "success"
+                          ? "border-green-500/20 bg-green-500/10 text-green-400"
+                          : "border-red-500/20 bg-red-500/10 text-red-400"
+                      }`}
+                    >
+                      {status}
+                    </motion.div>
+                  )}
+
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={!loading ? { scale: 1.02 } : {}}
+                    whileTap={!loading ? { scale: 0.98 } : {}}
                     type="submit"
-                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40"
+                    disabled={loading}
+                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-linear-to-r from-purple-500 to-pink-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <span className="relative z-10 flex items-center gap-2">
-                      Send Message
-                      <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      {loading ? (
+                        <>
+                          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </>
+                      )}
                     </span>
-                    <div className="absolute inset-0 -z-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 transition-opacity group-hover:opacity-100" />
+
+                    <div className="absolute inset-0 z-0 bg-linear-to-r from-purple-600 to-pink-600 opacity-0 transition-opacity group-hover:opacity-100" />
                   </motion.button>
                 </form>
               </div>
@@ -167,7 +271,7 @@ export default function Contact() {
           >
             <div className="group relative h-full min-h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl lg:min-h-[500px]">
               {/* Map with subtle overlay */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
               <iframe
                 title="Mithila Tech & IT Solutions location map"
@@ -183,6 +287,7 @@ export default function Contact() {
                 <div className="relative">
                   <div className="absolute -inset-4 animate-ping rounded-full bg-purple-500/30" />
                   <div className="absolute -inset-2 rounded-full bg-purple-500/20" />
+
                   <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl shadow-purple-500/30">
                     <MapPin className="h-5 w-5 text-white" />
                   </div>
