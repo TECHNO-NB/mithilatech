@@ -1,5 +1,5 @@
 // @ts-nocheck
-const brands = ["Google", "Meta", "Microsoft", "Intel", "AWS", "Shopify", "Slack"];
+const brands = ["Mega Motors", "Malla Book keeping Services", "GVAEC", "SUBBA CLEANING SERVICES", "POOJALAYA,", "Dermaglow RN", "HERO MOTORS"];
 
 export default function BrandLogos() {
   return (
