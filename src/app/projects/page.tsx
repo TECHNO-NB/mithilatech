@@ -224,9 +224,9 @@ export default function Portfolio() {
                     background: item.gradient || 'linear-gradient(135deg, #FF6B6B, #4ECDC4)'
                   }}
                 >
-                  {item.thumbnail_url ? (
+                  {item.thumbnail ? (
                     <img 
-                      src={item.thumbnail_url} 
+                      src={item.thumbnail} 
                       alt={item.title}
                       className="h-full w-full object-cover mix-blend-overlay"
                     />
