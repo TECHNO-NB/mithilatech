@@ -9,9 +9,7 @@ import axios from "axios";
 // API Configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
 
-// Portfolio API functions
 const portfolioAPI = {
-  // Get only 10 portfolio items
   getLimited: async (limit = 10) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/portfolio-items/?limit=${limit}&ordering=order`);

@@ -67,9 +67,9 @@ export default function Contact() {
                   {[
                     { icon: MapPin, text: "Sallaghari, Bhaktapur, Nepal" },
                     { icon: Phone, text: "982-9705977", href: "tel:+9779829705977" },
-                    { icon: Phone, text: "986-3007234", href: "tel:+9779863007234" },
-                    { icon: Mail, text: "info@mithilatech.com", href: "mailto:info@mithilatech.com" },
-                    { icon: Globe, text: "www.mithilatech.com", href: "https://www.mithilatech.com" },
+                    // { icon: Phone, text: "986-3007234", href: "tel:+9779863007234" },
+                    { icon: Mail, text: "info@mithilatechsolutions.com", href: "mailto:info@mithilatechsolutions.com" },
+                    { icon: Globe, text: "mithilatechsolutions.com", href: "https://www.mithilatechsolutions.com" },
                   ].map((item, idx) => (
                     <motion.div
                       key={idx}
@@ -107,7 +107,7 @@ export default function Contact() {
                         required
                         className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 backdrop-blur-sm transition-all focus:border-purple-400/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
                       />
-                      <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
+                      <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-r from-purple-500/10 to-pink-500/10 opacity-0 blur-xl transition-opacity group-focus-within:opacity-100" />
                     </div>
                     <div className="group relative">
                       <input
