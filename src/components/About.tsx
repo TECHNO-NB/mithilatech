@@ -23,7 +23,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
             About Us
           </p>
           <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
@@ -39,7 +39,7 @@ export default function About() {
           <ul className="mt-6 space-y-3">
             {highlights.map((item) => (
               <li key={item} className="flex items-center gap-3 text-sm text-neutral-200">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-accent" />
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-red-500" />
                 {item}
               </li>
             ))}
@@ -47,7 +47,7 @@ export default function About() {
 
           <a
             href="#about"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background transition-transform hover:scale-105"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-red-500 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
           >
             Know More About Us
           </a>
@@ -59,17 +59,17 @@ export default function About() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br from-surface-2 to-black"
+          className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-surface-2 to-black"
         >
           <div className="dot-grid absolute inset-0 opacity-20" />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-background">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500 text-white">
               <span className="text-lg font-extrabold">M</span>
             </span>
             <p className="text-lg font-extrabold tracking-wide text-white">MITHILA</p>
             <button
               aria-label="Play video"
-              className="group flex h-16 w-16 items-center justify-center rounded-full border-2 border-accent text-accent transition-colors hover:bg-accent hover:text-background"
+              className="group flex h-16 w-16 items-center justify-center rounded-full border-2 border-red-500 text-red-500 transition-colors hover:bg-red-500 hover:text-white"
             >
               <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
             </button>
@@ -81,7 +81,7 @@ export default function About() {
       <div className="container-px mt-20 lg:mt-28">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Why Choose Us
             </p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
@@ -98,7 +98,7 @@ export default function About() {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
               >
-                <item.icon className="h-7 w-7 text-accent" />
+                <item.icon className="h-7 w-7 text-red-500" />
                 <h4 className="mt-3 text-sm font-bold text-white sm:text-base">
                   {item.title}
                 </h4>

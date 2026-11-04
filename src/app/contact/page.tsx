@@ -77,7 +77,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-2xl text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-purple-400 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-red-500 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5" />
             Get in touch
           </div>
@@ -85,7 +85,7 @@ export default function Contact() {
           <h2 className="mt-4 bg-linear-to-r from-white to-white/70 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl">
             Let's Create Something
             <br />
-            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-red-500">
               Amazing Together
             </span>
           </h2>
@@ -138,7 +138,7 @@ export default function Contact() {
                       whileHover={{ scale: 1.02, y: -2 }}
                       className="flex items-center gap-3 rounded-2xl border border-white/5 bg-white/5 px-4 py-3 backdrop-blur-sm transition-all hover:border-purple-500/30 hover:bg-white/10"
                     >
-                      <item.icon className="h-4 w-4 shrink-0 text-purple-400" />
+                      <item.icon className="h-4 w-4 shrink-0 text-red-500" />
 
                       {item.href ? (
                         <a
@@ -238,7 +238,7 @@ export default function Contact() {
                     whileTap={!loading ? { scale: 0.98 } : {}}
                     type="submit"
                     disabled={loading}
-                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-linear-to-r from-purple-500 to-pink-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-red-500 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       {loading ? (

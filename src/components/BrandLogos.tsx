@@ -75,7 +75,7 @@ export default function BrandLogos() {
     <section className="border-y border-white/5 bg-surface/60 py-10 overflow-hidden">
       <div className="container-px">
         <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-          Trusted by <span className="text-accent">Brands</span>
+          Trusted by <span className="text-red-500">Brands</span>
         </p>
         <div className="relative overflow-hidden">
           <div

@@ -133,7 +133,7 @@ export default function Portfolio() {
       <section id="portfolio" className="py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Our Portfolio
             </p>
             <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
@@ -141,7 +141,7 @@ export default function Portfolio() {
             </h2>
           </div>
           <div className="mt-20 flex justify-center">
-            <Loader2 className="h-12 w-12 animate-spin text-accent" />
+            <Loader2 className="h-12 w-12 animate-spin text-red-500" />
           </div>
         </div>
       </section>
@@ -154,7 +154,7 @@ export default function Portfolio() {
       <section id="portfolio" className="py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Our Portfolio
             </p>
             <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
@@ -165,7 +165,7 @@ export default function Portfolio() {
             <p className="text-red-400">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-full bg-accent px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-accent/80"
+              className="mt-4 rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-red-500/80"
             >
               Retry
             </button>
@@ -181,7 +181,7 @@ export default function Portfolio() {
       <section id="portfolio" className="py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Our Portfolio
             </p>
             <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
@@ -198,7 +198,7 @@ export default function Portfolio() {
     <section id="portfolio" className="py-20 lg:py-28">
       <div className="container-px">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
             Our Portfolio
           </p>
           <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
@@ -214,8 +214,8 @@ export default function Portfolio() {
               onClick={() => setActive(filter)}
               className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                 active === filter
-                  ? "bg-accent text-background"
-                  : "border border-white/10 text-neutral-300 hover:border-accent/40 hover:text-accent"
+                  ? "bg-red-500 text-background"
+                  : "border border-white/10 text-neutral-300 hover:border-red-500/40 hover:text-red-500"
               }`}
             >
               {filter}
@@ -228,7 +228,7 @@ export default function Portfolio() {
           <button
             onClick={() => scrollBy(-1)}
             aria-label="Scroll left"
-            className="absolute -left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-white hover:border-accent hover:text-accent lg:flex"
+            className="absolute -left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-white hover:border-red-500 hover:text-red-500 lg:flex"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -267,7 +267,7 @@ export default function Portfolio() {
                   {/* Overlay with project info */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="text-center text-white">
-                      <p className="text-xs font-medium uppercase tracking-wider text-accent">
+                      <p className="text-xs font-medium uppercase tracking-wider text-red-500">
                         View Project
                       </p>
                     </div>
@@ -296,7 +296,7 @@ export default function Portfolio() {
           <button
             onClick={() => scrollBy(1)}
             aria-label="Scroll right"
-            className="absolute -right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-white hover:border-accent hover:text-accent lg:flex"
+            className="absolute -right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-white hover:border-red-500 hover:text-red-500 lg:flex"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

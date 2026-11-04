@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Mithila Tech & IT Solutions helps businesses grow online with innovative IT solutions, creative design and result-driven digital marketing.",
     icons:{
-      icon:"/mithilatechlogo.jpeg"
+      icon:"/mithilatechlogo.png"
     }
 };
 

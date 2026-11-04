@@ -2,6 +2,9 @@
 import { MapPin, Phone, Mail, Globe, ArrowUp, Zap } from "lucide-react";
 import { footerLinks } from "@/data/site";
 import { SocialFacebook, SocialInstagram, SocialLinkedIn, SocialYoutube } from "@/components/SocialIcons";
+import logo from "../../public/mithilatechlogo.png"
+import Image from "next/image";
+
 
 const socials = [
   { icon: SocialFacebook, label: "Facebook" },
@@ -16,10 +19,10 @@ export default function Footer() {
       <div className="container-px grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
         {/* Brand */}
         <div>
-          <a href="#home" className="flex items-center gap-2.5">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-background">
-              <Zap className="h-5 w-5" fill="currentColor" strokeWidth={0} />
-            </span>
+          <a href="/" className="flex items-center gap-2.5">
+           
+              <Image src={logo} width={100} height={100} alt="Logo"/>
+          
             <span className="leading-tight">
               <span className="block text-lg font-extrabold tracking-wide text-white">
                 MITHILA
@@ -39,7 +42,7 @@ export default function Footer() {
                 key={s.label}
                 href="/"
                 aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-muted transition-colors hover:border-accent hover:text-accent"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-muted transition-colors hover:border-red-500 hover:text-red-500"
               >
                 <s.icon className="h-4 w-4" />
               </a>
@@ -53,7 +56,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5">
             {footerLinks.quickLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="text-sm text-muted hover:text-accent">
+                <a href={link.href} className="text-sm text-muted hover:text-red-500">
                   {link.label}
                 </a>
               </li>
@@ -67,7 +70,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5">
             {footerLinks.services.map((label) => (
               <li key={label}>
-                <a href="#services" className="text-sm text-muted hover:text-accent">
+                <a href="#services" className="text-sm text-muted hover:text-red-500">
                   {label}
                 </a>
               </li>
@@ -80,19 +83,19 @@ export default function Footer() {
           <h4 className="text-sm font-bold uppercase tracking-wide text-white">Contact Info</h4>
           <ul className="mt-4 space-y-3.5">
             <li className="flex items-start gap-3 text-sm text-muted">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
               Sallaghari, Bhaktapur, Bagmati, Nepal
             </li>
             <li className="flex items-center gap-3 text-sm text-muted">
-              <Phone className="h-4 w-4 shrink-0 text-accent" />
+              <Phone className="h-4 w-4 shrink-0 text-red-500" />
                9829705977
             </li>
             <li className="flex items-center gap-3 text-sm text-muted">
-              <Mail className="h-4 w-4 shrink-0 text-accent" />
+              <Mail className="h-4 w-4 shrink-0 text-red-500" />
               info@mithilatechsolutions.com
             </li>
             <li className="flex items-center gap-3 text-sm text-muted">
-              <Globe className="h-4 w-4 shrink-0 text-accent" />
+              <Globe className="h-4 w-4 shrink-0 text-red-500" />
               mithilatechsolutions.com
             </li>
           </ul>
@@ -106,7 +109,7 @@ export default function Footer() {
           </p>
           <a
             href="#home"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 hover:text-accent"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 hover:text-red-500"
           >
             Back to Top <ArrowUp className="h-3.5 w-3.5" />
           </a>

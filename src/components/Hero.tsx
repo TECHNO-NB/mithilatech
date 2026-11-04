@@ -20,7 +20,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-red-500">
             <Sparkles className="h-3.5 w-3.5" />
             We Build Digital Solutions
           </span>
@@ -28,7 +28,7 @@ export default function Hero() {
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
             Transforming Ideas
             <br />
-            Into <span className="text-accent">Digital Success</span>
+            Into <span className="text-red-500">Digital Success</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
@@ -39,7 +39,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-background transition-transform hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-full bg-red-500 px-6 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105"
             >
               Get Free Consultation
               <ArrowRight className="h-4 w-4" />
@@ -65,7 +65,7 @@ export default function Hero() {
             <div>
               <p className="text-sm font-semibold text-white">100+ Happy Clients</p>
               <div className="flex items-center gap-1.5">
-                <div className="flex text-accent">
+                <div className="flex text-red-500">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5" fill="currentColor" strokeWidth={0} />
                   ))}
@@ -94,19 +94,19 @@ export default function Hero() {
               <span className="h-2 w-2 rounded-full bg-amber-400/70" />
               <span className="h-2 w-2 rounded-full bg-accent/70" />
             </div>
-            <div className="aspect-[16/10] rounded-lg bg-gradient-to-br from-neutral-900 via-black to-neutral-900 p-5">
+            <div className="aspect-[16/10] rounded-lg bg-red-500-to-br from-neutral-900 via-black to-neutral-900 p-5">
               <p className="text-sm font-bold leading-snug text-white sm:text-lg">
                 We Build Solutions
                 <br />
-                That Drive <span className="text-accent">Growth</span>
+                That Drive <span className="text-red-500">Growth</span>
               </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-[10px] font-semibold text-background sm:text-xs">
+              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-red-500 px-3 py-1.5 text-[10px] font-semibold text-white sm:text-xs">
                 Discover More <ArrowRight className="h-3 w-3" />
               </span>
               <div className="mt-6 grid grid-cols-3 gap-2">
                 {["100+", "4.9", "24/7"].map((v) => (
                   <div key={v} className="rounded-md border border-white/10 bg-white/5 p-2 text-center">
-                    <p className="text-xs font-bold text-accent sm:text-sm">{v}</p>
+                    <p className="text-xs font-bold text-red-500 sm:text-sm">{v}</p>
                   </div>
                 ))}
               </div>
@@ -129,7 +129,7 @@ export default function Hero() {
                 <div className="h-1.5 w-3/4 rounded-full bg-white/10" />
                 <div className="h-1.5 w-1/2 rounded-full bg-white/10" />
               </div>
-              <span className="mt-4 inline-flex rounded-full bg-accent px-2.5 py-1 text-[8px] font-semibold text-background">
+              <span className="mt-4 inline-flex rounded-full bg-red-500 px-2.5 py-1 text-[8px] font-semibold text-white">
                 Learn More
               </span>
             </div>

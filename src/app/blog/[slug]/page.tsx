@@ -154,13 +154,13 @@ export default function BlogDetailsPage() {
         <div className="container-px">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-500"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Blog
           </Link>
           <div className="mx-auto mt-20 max-w-3xl text-center">
-            <Loader2 className="mx-auto h-12 w-12 animate-spin text-accent" />
+            <Loader2 className="mx-auto h-12 w-12 animate-spin text-red-500" />
             <p className="mt-4 text-muted">Loading blog post...</p>
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function BlogDetailsPage() {
         <div className="container-px">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-500"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Blog
@@ -190,7 +190,7 @@ export default function BlogDetailsPage() {
             <p className="text-red-400">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-full bg-accent px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-accent/80"
+              className="mt-4 rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-red-500/80"
             >
               Retry
             </button>
@@ -211,14 +211,14 @@ export default function BlogDetailsPage() {
       <div className="container-px">
         <Link
           href="/blogs"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-500"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Blog
         </Link>
 
         <div className="mx-auto mt-6 max-w-3xl">
-          <span className="inline-flex rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-background">
+          <span className="inline-flex rounded-full bg-red-500 px-3 py-1 text-[11px] font-semibold text-background">
             {blog.category}
           </span>
 
@@ -228,15 +228,15 @@ export default function BlogDetailsPage() {
 
           <div className="mt-5 flex flex-wrap items-center gap-5 text-xs text-muted">
             <span className="flex items-center gap-1.5">
-              <User className="h-3.5 w-3.5 text-accent" />
+              <User className="h-3.5 w-3.5 text-red-500" />
               {blog.author}
             </span>
             <span className="flex items-center gap-1.5">
-              <CalendarDays className="h-3.5 w-3.5 text-accent" />
+              <CalendarDays className="h-3.5 w-3.5 text-red-500" />
               {blog.date}
             </span>
             <span className="flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5 text-accent" />
+              <Clock className="h-3.5 w-3.5 text-red-500" />
               {blog.readTime}
             </span>
           </div>
@@ -259,7 +259,7 @@ export default function BlogDetailsPage() {
 
         {related.length > 0 && (
           <div className="mx-auto mt-20 max-w-3xl border-t border-white/8 pt-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Keep Reading
             </p>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
@@ -267,12 +267,12 @@ export default function BlogDetailsPage() {
                 <Link
                   key={r.id || r.slug}
                   href={`/blogs/${r.slug}`}
-                  className="group rounded-2xl border border-white/8 bg-surface-2/60 p-5 transition-colors hover:border-accent/40"
+                  className="group rounded-2xl border border-white/8 bg-surface-2/60 p-5 transition-colors hover:border-red-500/40"
                 >
-                  <span className="text-[11px] font-semibold text-accent">
+                  <span className="text-[11px] font-semibold text-red-500">
                     {r.category}
                   </span>
-                  <h4 className="mt-2 text-sm font-bold text-white transition-colors group-hover:text-accent sm:text-base">
+                  <h4 className="mt-2 text-sm font-bold text-white transition-colors group-hover:text-red-500 sm:text-base">
                     {r.title}
                   </h4>
                   <p className="mt-1 text-xs text-muted">{r.date}</p>

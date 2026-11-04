@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ArrowRight, Zap } from "lucide-react";
 import { navLinks } from "@/data/site";
-import logo from "../../public/mithilatechlogo.jpeg"
+import logo from "../../public/mithilatechlogo.png"
 import Image from "next/image";
 
 export default function Navbar() {
@@ -15,12 +15,12 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-white/5 bg-background/80 backdrop-blur-md">
       <div className="container-px flex h-20 items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-background">
+        <a href="/" className="flex items-center gap-2">
+         
             <Image src={logo} width={100} height={100} alt="logo" />
-          </span>
+      
           <span className="leading-tight">
-            <span className="block text-lg font-extrabold tracking-wide text-white">
+            <span className="block text-lg font-extrabold tracking-wide text-red-500">
               MITHILA
             </span>
             <span className="block text-[10px] font-medium tracking-[0.2em] text-muted">
@@ -35,7 +35,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-neutral-300 transition-colors hover:text-accent"
+              className="text-sm font-medium text-neutral-300 transition-colors hover:text-red-500"
             >
               {link.label}
             </a>
@@ -44,7 +44,7 @@ export default function Navbar() {
 
         <a
           href="/contact"
-          className="hidden items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-transform hover:scale-105 lg:inline-flex"
+          className="hidden items-center gap-2 rounded-full bg-red-500 px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 lg:inline-flex"
         >
           Get A Quote
           <ArrowRight className="h-4 w-4" />
@@ -82,7 +82,7 @@ export default function Navbar() {
             <a
               href="/contact"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-red-500 px-5 py-2.5 text-sm font-semibold text-white"
             >
               Get A Quote
               <ArrowRight className="h-4 w-4" />

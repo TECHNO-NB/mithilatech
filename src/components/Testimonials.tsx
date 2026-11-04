@@ -21,7 +21,7 @@ export default function Testimonials() {
     <section className="py-20 lg:py-28">
       <div className="container-px">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
             Testimonials
           </p>
           <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
@@ -33,13 +33,13 @@ export default function Testimonials() {
           <button
             onClick={() => go(-1)}
             aria-label="Previous testimonial"
-            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white hover:border-accent hover:text-accent sm:flex"
+            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white hover:border-red-500 hover:text-red-500 sm:flex"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
 
           <div className="relative min-h-55 flex-1 overflow-hidden rounded-2xl border border-white/8 bg-surface px-8 py-10 text-center sm:px-12">
-            <Quote className="mx-auto h-8 w-8 text-accent" fill="currentColor" strokeWidth={0} />
+            <Quote className="mx-auto h-8 w-8 text-red-500" fill="currentColor" strokeWidth={0} />
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
@@ -65,7 +65,7 @@ export default function Testimonials() {
           <button
             onClick={() => go(1)}
             aria-label="Next testimonial"
-            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white hover:border-accent hover:text-accent sm:flex"
+            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white hover:border-red-500 hover:text-red-500 sm:flex"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -78,7 +78,7 @@ export default function Testimonials() {
               onClick={() => setIndex(i)}
               aria-label={`Go to testimonial ${i + 1}`}
               className={`h-1.5 rounded-full transition-all ${
-                i === index ? "w-6 bg-accent" : "w-1.5 bg-white/15"
+                i === index ? "w-6 bg-red-500" : "w-1.5 bg-white/15"
               }`}
             />
           ))}

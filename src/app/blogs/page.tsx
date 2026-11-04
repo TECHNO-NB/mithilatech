@@ -136,7 +136,7 @@ export default function Blogs() {
       <section id="blogs" className="py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Our Blog
             </p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
@@ -148,7 +148,7 @@ export default function Blogs() {
             </p>
           </div>
           <div className="mt-20 flex justify-center">
-            <Loader2 className="h-12 w-12 animate-spin text-accent" />
+            <Loader2 className="h-12 w-12 animate-spin text-red-500" />
           </div>
         </div>
       </section>
@@ -161,7 +161,7 @@ export default function Blogs() {
       <section id="blogs" className="py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Our Blog
             </p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
@@ -176,7 +176,7 @@ export default function Blogs() {
             <p className="text-red-400">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-full bg-accent px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-accent/80"
+              className="mt-4 rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-red-500/80"
             >
               Retry
             </button>
@@ -192,7 +192,7 @@ export default function Blogs() {
       <section id="blogs" className="py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
               Our Blog
             </p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
@@ -213,7 +213,7 @@ export default function Blogs() {
     <section id="blogs" className="py-20 lg:py-28">
       <div className="container-px">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
             Our Blog
           </p>
           <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
@@ -250,7 +250,7 @@ export default function Blogs() {
                 ) : (
                   <div className="dot-grid absolute inset-0 opacity-20" />
                 )}
-                <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-background">
+                <span className="absolute left-4 top-4 rounded-full bg-red-500 px-3 py-1 text-[11px] font-semibold text-background">
                   {blog.category}
                 </span>
               </Link>
@@ -258,11 +258,11 @@ export default function Blogs() {
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-center gap-4 text-[11px] text-muted">
                   <span className="flex items-center gap-1.5">
-                    <CalendarDays className="h-3.5 w-3.5 text-accent" />
+                    <CalendarDays className="h-3.5 w-3.5 text-red-500" />
                     {blog.date}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5 text-accent" />
+                    <Clock className="h-3.5 w-3.5 text-red-500" />
                     {blog.readTime}
                   </span>
                 </div>
@@ -270,7 +270,7 @@ export default function Blogs() {
                 <h3 className="mt-4 text-base font-bold leading-snug text-white sm:text-lg">
                   <Link
                     href={`/blog/${blog.slug}`}
-                    className="transition-colors hover:text-accent"
+                    className="transition-colors hover:text-red-500"
                   >
                     {blog.title}
                   </Link>
@@ -282,7 +282,7 @@ export default function Blogs() {
 
                 <Link
                   href={`/blog/${blog.slug}`}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-transform group-hover:translate-x-0.5"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 transition-transform group-hover:translate-x-0.5"
                 >
                   Read More
                   <ArrowUpRight className="h-4 w-4" />
