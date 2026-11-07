@@ -24,7 +24,7 @@ const blogAPI = {
       throw error;
     }
   },
-  
+
   // Get all blogs (if needed)
   getAll: async () => {
     try {
@@ -35,7 +35,7 @@ const blogAPI = {
       throw error;
     }
   },
-  
+
   // Get blogs by category
   getByCategory: async (category) => {
     try {
@@ -48,7 +48,7 @@ const blogAPI = {
       throw error;
     }
   },
-  
+
   // Get a single blog by slug
   getBySlug: async (slug) => {
     try {
@@ -64,7 +64,7 @@ const blogAPI = {
 // Transform API data to component format
 const transformBlogData = (apiData) => {
   if (!apiData || !Array.isArray(apiData)) return [];
-  
+
   return apiData.map((blog) => ({
     id: blog.id,
     title: blog.title,
@@ -111,14 +111,14 @@ export default function Blogs() {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Fetch only published blogs, limited to 6, ordered by published date
         const data = await blogAPI.getPublished(6);
-        
+
         // Transform data to match component format
         const transformedData = transformBlogData(data);
         setBlogs(transformedData);
-        
+
       } catch (err) {
         console.error('Error loading blogs:', err);
         setError('Failed to load blog posts. Please try again.');
@@ -133,22 +133,22 @@ export default function Blogs() {
   // Loading state
   if (loading) {
     return (
-      <section id="blogs" className="py-20 lg:py-28">
+      <section id="blogs" className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Our Blog
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
               Insights, Tips &amp; Updates
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
               Practical advice on web &amp; app development, digital marketing,
               and growing your business online — from the Mithila Tech team.
             </p>
           </div>
           <div className="mt-20 flex justify-center">
-            <Loader2 className="h-12 w-12 animate-spin text-red-500" />
+            <Loader2 className="h-12 w-12 animate-spin text-red-600" />
           </div>
         </div>
       </section>
@@ -158,25 +158,25 @@ export default function Blogs() {
   // Error state
   if (error) {
     return (
-      <section id="blogs" className="py-20 lg:py-28">
+      <section id="blogs" className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Our Blog
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
               Insights, Tips &amp; Updates
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
               Practical advice on web &amp; app development, digital marketing,
               and growing your business online — from the Mithila Tech team.
             </p>
           </div>
           <div className="mt-20 text-center">
-            <p className="text-red-400">{error}</p>
+            <p className="text-red-600">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-red-500/80"
+              className="mt-4 rounded-full bg-red-600 px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700"
             >
               Retry
             </button>
@@ -189,20 +189,20 @@ export default function Blogs() {
   // If no blogs, show message
   if (blogs.length === 0) {
     return (
-      <section id="blogs" className="py-20 lg:py-28">
+      <section id="blogs" className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Our Blog
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
               Insights, Tips &amp; Updates
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
               Practical advice on web &amp; app development, digital marketing,
               and growing your business online — from the Mithila Tech team.
             </p>
-            <p className="mt-8 text-muted">No blog posts available yet. Check back soon!</p>
+            <p className="mt-8 text-black/60">No blog posts available yet. Check back soon!</p>
           </div>
         </div>
       </section>
@@ -210,16 +210,16 @@ export default function Blogs() {
   }
 
   return (
-    <section id="blogs" className="py-20 lg:py-28">
+    <section id="blogs" className="bg-white py-20 lg:py-28">
       <div className="container-px">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
             Our Blog
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
             Insights, Tips &amp; Updates
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+          <p className="mt-4 text-sm leading-relaxed text-black/60 sm:text-base">
             Practical advice on web &amp; app development, digital marketing,
             and growing your business online — from the Mithila Tech team.
           </p>
@@ -233,13 +233,13 @@ export default function Blogs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-surface-2/60"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm transition-shadow hover:shadow-lg hover:shadow-black/5"
             >
               {/* Cover */}
               <Link
                 href={`/blog/${blog.slug}`}
                 aria-label={blog.title}
-                className="relative block aspect-[16/10] overflow-hidden bg-gradient-to-br from-surface-2 to-black"
+                className="relative block aspect-[16/10] overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-200"
               >
                 {blog.featured_image_url ? (
                   <img
@@ -248,41 +248,41 @@ export default function Blogs() {
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="dot-grid absolute inset-0 opacity-20" />
+                  <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:radial-gradient(#000_1px,transparent_1px)] [background-size:22px_22px]" />
                 )}
-                <span className="absolute left-4 top-4 rounded-full bg-red-500 px-3 py-1 text-[11px] font-semibold text-background">
+                <span className="absolute left-4 top-4 rounded-full bg-red-600 px-3 py-1 text-[11px] font-semibold text-white">
                   {blog.category}
                 </span>
               </Link>
 
               <div className="flex flex-1 flex-col p-6">
-                <div className="flex items-center gap-4 text-[11px] text-muted">
+                <div className="flex items-center gap-4 text-[11px] text-black/60">
                   <span className="flex items-center gap-1.5">
-                    <CalendarDays className="h-3.5 w-3.5 text-red-500" />
+                    <CalendarDays className="h-3.5 w-3.5 text-red-600" />
                     {blog.date}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5 text-red-500" />
+                    <Clock className="h-3.5 w-3.5 text-red-600" />
                     {blog.readTime}
                   </span>
                 </div>
 
-                <h3 className="mt-4 text-base font-bold leading-snug text-white sm:text-lg">
+                <h3 className="mt-4 text-base font-bold leading-snug text-black sm:text-lg">
                   <Link
                     href={`/blog/${blog.slug}`}
-                    className="transition-colors hover:text-red-500"
+                    className="transition-colors hover:text-red-600"
                   >
                     {blog.title}
                   </Link>
                 </h3>
 
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-black/60">
                   {blog.excerpt}
                 </p>
 
                 <Link
                   href={`/blog/${blog.slug}`}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-red-500 transition-transform group-hover:translate-x-0.5"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-red-600 transition-transform group-hover:translate-x-0.5"
                 >
                   Read More
                   <ArrowUpRight className="h-4 w-4" />

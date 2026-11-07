@@ -14,7 +14,7 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="py-20 lg:py-28">
+    <section id="about" className="bg-white py-20 lg:py-28">
       <div className="container-px grid gap-14 lg:grid-cols-2 lg:items-center">
         {/* Left: about text + video card */}
         <motion.div
@@ -23,13 +23,13 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
             About Us
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
             We Are Mithila Tech &amp; IT Solutions
           </h2>
-          <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base">
+          <p className="mt-5 text-sm leading-relaxed text-black/70 sm:text-base">
             Mithila Tech &amp; IT Solutions Pvt. Ltd. is a leading IT company
             based in Sallaghari, Bhaktapur. We provide innovative solutions
             in Web &amp; App Development, Digital Marketing, Graphic Design
@@ -38,8 +38,8 @@ export default function About() {
 
           <ul className="mt-6 space-y-3">
             {highlights.map((item) => (
-              <li key={item} className="flex items-center gap-3 text-sm text-neutral-200">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-red-500" />
+              <li key={item} className="flex items-center gap-3 text-sm text-black/80">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-red-600" />
                 {item}
               </li>
             ))}
@@ -47,7 +47,7 @@ export default function About() {
 
           <a
             href="#about"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-red-500 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-red-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-600/20 transition-transform hover:scale-105"
           >
             Know More About Us
           </a>
@@ -59,17 +59,17 @@ export default function About() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/8 bg-linear-to-br from-surface-2 to-black"
+          className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-br from-neutral-900 via-black to-neutral-900 shadow-xl shadow-black/10"
         >
-          <div className="dot-grid absolute inset-0 opacity-20" />
+          <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:radial-gradient(#fff_1px,transparent_1px)] [background-size:22px_22px]" />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500 text-white">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-600 text-white">
               <span className="text-lg font-extrabold">M</span>
             </span>
             <p className="text-lg font-extrabold tracking-wide text-white">MITHILA</p>
             <button
               aria-label="Play video"
-              className="group flex h-16 w-16 items-center justify-center rounded-full border-2 border-red-500 text-red-500 transition-colors hover:bg-red-500 hover:text-white"
+              className="group flex h-16 w-16 items-center justify-center rounded-full border-2 border-red-500 text-red-500 transition-colors hover:bg-red-600 hover:border-red-600 hover:text-white"
             >
               <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
             </button>
@@ -81,10 +81,10 @@ export default function About() {
       <div className="container-px mt-20 lg:mt-28">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Why Choose Us
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
               We Help You Grow Your Business Online
             </h2>
           </div>
@@ -98,11 +98,11 @@ export default function About() {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
               >
-                <item.icon className="h-7 w-7 text-red-500" />
-                <h4 className="mt-3 text-sm font-bold text-white sm:text-base">
+                <item.icon className="h-7 w-7 text-red-600" />
+                <h4 className="mt-3 text-sm font-bold text-black sm:text-base">
                   {item.title}
                 </h4>
-                <p className="mt-1 text-xs leading-relaxed text-muted sm:text-sm">
+                <p className="mt-1 text-xs leading-relaxed text-black/60 sm:text-sm">
                   {item.description}
                 </p>
               </motion.div>

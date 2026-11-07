@@ -21,14 +21,14 @@ export default function CtaBanner() {
 
         <div className="flex shrink-0 flex-wrap items-center gap-3">
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-red-500 px-5 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
           >
             Get Free Consultation
             <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white hover:border-red-500 hover:text-red-500"
           >
             <MessageCircle className="h-4 w-4" />

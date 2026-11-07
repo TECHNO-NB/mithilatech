@@ -24,7 +24,7 @@ const blogAPI = {
       throw error;
     }
   },
-  
+
   getRelated: async (category, excludeId) => {
     try {
       const response = await axios.get(
@@ -41,7 +41,7 @@ const blogAPI = {
 // Transform API data to component format
 const transformBlogData = (apiData) => {
   if (!apiData) return null;
-  
+
   return {
     id: apiData.id,
     title: apiData.title,
@@ -73,7 +73,7 @@ const transformBlogData = (apiData) => {
 // Transform related blogs
 const transformRelatedData = (apiData) => {
   if (!apiData || !Array.isArray(apiData)) return [];
-  
+
   return apiData.map(blog => ({
     id: blog.id,
     title: blog.title,
@@ -102,7 +102,7 @@ const calculateReadTime = (content) => {
 export default function BlogDetailsPage() {
   const params = useParams();
   const slug = params?.slug || 'digital-marketing-tips-for-small-businesses';
-  
+
   const [blog, setBlog] = useState(null);
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -116,26 +116,26 @@ export default function BlogDetailsPage() {
         setLoading(true);
         setError(null);
         setNotFound(false);
-        
+
         // Fetch the blog by slug
         const data = await blogAPI.getBySlug(slug);
-        
+
         if (!data) {
           setNotFound(true);
           return;
         }
-        
+
         // Transform data to match component format
         const transformedData = transformBlogData(data);
         setBlog(transformedData);
-        
+
         // Fetch related blogs (same category, excluding current)
         if (data.category) {
           const relatedData = await blogAPI.getRelated(data.slug, data.category, data.id);
           const transformedRelated = transformRelatedData(relatedData);
           setRelated(transformedRelated);
         }
-        
+
       } catch (err) {
         console.error('Error loading blog:', err);
         setError('Failed to load blog post. Please try again.');
@@ -150,18 +150,18 @@ export default function BlogDetailsPage() {
   // Loading state
   if (loading) {
     return (
-      <article className="py-20 lg:py-28">
+      <article className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-500"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-600"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Blog
           </Link>
           <div className="mx-auto mt-20 max-w-3xl text-center">
-            <Loader2 className="mx-auto h-12 w-12 animate-spin text-red-500" />
-            <p className="mt-4 text-muted">Loading blog post...</p>
+            <Loader2 className="mx-auto h-12 w-12 animate-spin text-red-600" />
+            <p className="mt-4 text-black/60">Loading blog post...</p>
           </div>
         </div>
       </article>
@@ -177,20 +177,20 @@ export default function BlogDetailsPage() {
   // Error state
   if (error) {
     return (
-      <article className="py-20 lg:py-28">
+      <article className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <Link
             href="/blogs"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-500"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-600"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Blog
           </Link>
           <div className="mx-auto mt-20 max-w-3xl text-center">
-            <p className="text-red-400">{error}</p>
+            <p className="text-red-600">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-red-500/80"
+              className="mt-4 rounded-full bg-red-600 px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700"
             >
               Retry
             </button>
@@ -207,43 +207,43 @@ export default function BlogDetailsPage() {
   }
 
   return (
-    <article className="py-20 lg:py-28">
+    <article className="bg-white py-20 lg:py-28">
       <div className="container-px">
         <Link
           href="/blogs"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-500"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-red-600"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Blog
         </Link>
 
         <div className="mx-auto mt-6 max-w-3xl">
-          <span className="inline-flex rounded-full bg-red-500 px-3 py-1 text-[11px] font-semibold text-background">
+          <span className="inline-flex rounded-full bg-red-600 px-3 py-1 text-[11px] font-semibold text-white">
             {blog.category}
           </span>
 
-          <h1 className="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-extrabold leading-tight text-black sm:text-4xl">
             {blog.title}
           </h1>
 
-          <div className="mt-5 flex flex-wrap items-center gap-5 text-xs text-muted">
+          <div className="mt-5 flex flex-wrap items-center gap-5 text-xs text-black/60">
             <span className="flex items-center gap-1.5">
-              <User className="h-3.5 w-3.5 text-red-500" />
+              <User className="h-3.5 w-3.5 text-red-600" />
               {blog.author}
             </span>
             <span className="flex items-center gap-1.5">
-              <CalendarDays className="h-3.5 w-3.5 text-red-500" />
+              <CalendarDays className="h-3.5 w-3.5 text-red-600" />
               {blog.date}
             </span>
             <span className="flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5 text-red-500" />
+              <Clock className="h-3.5 w-3.5 text-red-600" />
               {blog.readTime}
             </span>
           </div>
         </div>
 
         {/* Cover */}
-        <div className="relative mx-auto mt-10 aspect-[16/7] max-w-4xl overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br from-surface-2 to-black">
+        <div className="relative mx-auto mt-10 aspect-[16/7] max-w-4xl overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-br from-neutral-100 to-neutral-200 shadow-sm">
           {blog.featured_image_url ? (
             <img
               src={blog.featured_image_url}
@@ -251,15 +251,15 @@ export default function BlogDetailsPage() {
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="dot-grid absolute inset-0 opacity-20" />
+            <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:radial-gradient(#000_1px,transparent_1px)] [background-size:22px_22px]" />
           )}
         </div>
 
         <BlogDetailsContent content={blog.content} />
 
         {related.length > 0 && (
-          <div className="mx-auto mt-20 max-w-3xl border-t border-white/8 pt-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+          <div className="mx-auto mt-20 max-w-3xl border-t border-black/10 pt-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Keep Reading
             </p>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
@@ -267,15 +267,15 @@ export default function BlogDetailsPage() {
                 <Link
                   key={r.id || r.slug}
                   href={`/blogs/${r.slug}`}
-                  className="group rounded-2xl border border-white/8 bg-surface-2/60 p-5 transition-colors hover:border-red-500/40"
+                  className="group rounded-2xl border border-black/10 bg-white p-5 shadow-sm transition-all hover:border-red-600/40 hover:shadow-md"
                 >
-                  <span className="text-[11px] font-semibold text-red-500">
+                  <span className="text-[11px] font-semibold text-red-600">
                     {r.category}
                   </span>
-                  <h4 className="mt-2 text-sm font-bold text-white transition-colors group-hover:text-red-500 sm:text-base">
+                  <h4 className="mt-2 text-sm font-bold text-black transition-colors group-hover:text-red-600 sm:text-base">
                     {r.title}
                   </h4>
-                  <p className="mt-1 text-xs text-muted">{r.date}</p>
+                  <p className="mt-1 text-xs text-black/60">{r.date}</p>
                 </Link>
               ))}
             </div>

@@ -1,4 +1,3 @@
-
 // @ts-nocheck
 "use client";
 
@@ -26,7 +25,7 @@ const portfolioAPI = {
 // Transform API data to component format
 const transformPortfolioData = (apiData:any) => {
   if (!apiData || !Array.isArray(apiData)) return [];
-  
+
   return apiData.map((item) => ({
     id: item.id,
     title: item.title,
@@ -46,30 +45,30 @@ const transformPortfolioData = (apiData:any) => {
 // Get unique categories from data
 const getCategoriesFromData = (data) => {
   if (!data || !Array.isArray(data)) return ['All'];
-  
+
   const categories = data
     .map(item => item.category)
     .filter(category => category && category !== 'all')
     .map(category => category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' '));
-  
+
   return ['All', ...new Set(categories)];
 };
 
 // Filter portfolio items by category
 const filterPortfolioByCategory = (data, category) => {
   if (!data || !Array.isArray(data)) return [];
-  
+
   if (category === 'All') return data;
-  
+
   const categoryMap = {
     'Websites': 'websites',
     'Mobile Apps': 'mobile_apps',
     'Branding': 'branding',
     'Digital Marketing': 'digital_marketing',
   };
-  
+
   const categoryValue = categoryMap[category] || category.toLowerCase();
-  return data.filter(item => 
+  return data.filter(item =>
     item.category && item.category.toLowerCase() === categoryValue.toLowerCase()
   );
 };
@@ -88,18 +87,18 @@ export default function Portfolio() {
       try {
         setLoading(true);
         setError(null);
-        
+
         // Fetch data from API
         const data = await portfolioAPI.getAll();
-        
+
         // Transform data to match component format
         const transformedData = transformPortfolioData(data);
         setAllItems(transformedData);
-        
+
         // Extract unique categories for filters
         const categories = getCategoriesFromData(transformedData);
         setFilters(categories);
-        
+
       } catch (err) {
         console.error('Error loading portfolio:', err);
         setError('Failed to load portfolio items. Please try again.');
@@ -121,18 +120,18 @@ export default function Portfolio() {
   // Loading state
   if (loading) {
     return (
-      <section id="portfolio" className="py-20 lg:py-28">
+      <section id="portfolio" className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Our Portfolio
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold text-black sm:text-4xl">
               Our Recent Projects
             </h2>
           </div>
           <div className="mt-20 flex justify-center">
-            <Loader2 className="h-12 w-12 animate-spin text-red-500" />
+            <Loader2 className="h-12 w-12 animate-spin text-red-600" />
           </div>
         </div>
       </section>
@@ -142,21 +141,21 @@ export default function Portfolio() {
   // Error state
   if (error) {
     return (
-      <section id="portfolio" className="py-20 lg:py-28">
+      <section id="portfolio" className="bg-white py-20 lg:py-28">
         <div className="container-px">
           <div className="mx-auto max-w-xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
               Our Portfolio
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-extrabold text-black sm:text-4xl">
               Our Recent Projects
             </h2>
           </div>
           <div className="mt-20 text-center">
-            <p className="text-red-400">{error}</p>
+            <p className="text-red-600">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 rounded-full bg-red-500 px-6 py-2 text-sm font-semibold text-background transition-colors hover:bg-red-500/80"
+              className="mt-4 rounded-full bg-red-600 px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-red-700"
             >
               Retry
             </button>
@@ -167,13 +166,13 @@ export default function Portfolio() {
   }
 
   return (
-    <section id="portfolio" className="py-20 lg:py-28">
+    <section id="portfolio" className="bg-white py-20 lg:py-28">
       <div className="container-px">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
             Our Portfolio
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-extrabold text-black sm:text-4xl">
             Our Recent Projects
           </h2>
         </div>
@@ -186,8 +185,8 @@ export default function Portfolio() {
               onClick={() => setActive(filter)}
               className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                 active === filter
-                  ? "bg-red-500 text-background"
-                  : "border border-white/10 text-neutral-300 hover:border-red-500/40 hover:text-red-500"
+                  ? "bg-red-600 text-white shadow-md shadow-red-600/20"
+                  : "border border-black/10 text-black/70 hover:border-red-600/40 hover:text-red-600"
               }`}
             >
               {filter}
@@ -200,7 +199,7 @@ export default function Portfolio() {
           <button
             onClick={() => scrollBy(-1)}
             aria-label="Scroll left"
-            className="absolute -left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-white hover:border-red-500 hover:text-red-500 lg:flex"
+            className="absolute -left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm hover:border-red-600 hover:text-red-600 lg:flex"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -218,45 +217,45 @@ export default function Portfolio() {
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="group w-[75%] shrink-0 snap-start sm:w-[46%] lg:w-[30%]"
               >
-                <div 
-                  className="aspect-[4/3] overflow-hidden rounded-2xl transition-transform duration-500 group-hover:scale-[1.02] relative"
-                  style={{ 
+                <div
+                  className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-md transition-transform duration-500 group-hover:scale-[1.02] group-hover:shadow-xl group-hover:shadow-black/10"
+                  style={{
                     background: item.gradient || 'linear-gradient(135deg, #FF6B6B, #4ECDC4)'
                   }}
                 >
                   {item.thumbnail ? (
-                    <img 
-                      src={item.thumbnail} 
+                    <img
+                      src={item.thumbnail}
                       alt={item.title}
                       className="h-full w-full object-cover mix-blend-overlay"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-white/30 text-4xl font-bold">
+                    <div className="flex h-full w-full items-center justify-center text-4xl font-bold text-white/30">
                       {item.title.charAt(0)}
                     </div>
                   )}
-                  
+
                   {/* Overlay with project info */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="text-center text-white">
-                      <p className="text-xs font-medium uppercase tracking-wider text-red-500">
+                      <p className="text-xs font-medium uppercase tracking-wider text-red-400">
                         View Project
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className="mt-3">
-                  <h3 className="text-base font-bold text-white">{item.title}</h3>
-                  <p className="text-xs text-muted">{item.category}</p>
+                  <h3 className="text-base font-bold text-black">{item.title}</h3>
+                  <p className="text-xs text-black/60">{item.category}</p>
                   {item.technologies && item.technologies.length > 0 && (
                     <div className="mt-1 flex flex-wrap gap-1">
                       {item.technologies.slice(0, 3).map((tech, idx) => (
-                        <span key={idx} className="text-[10px] text-muted/60">
+                        <span key={idx} className="text-[10px] text-black/40">
                           {tech.trim()}{idx < Math.min(item.technologies.length, 3) - 1 ? ',' : ''}
                         </span>
                       ))}
                       {item.technologies.length > 3 && (
-                        <span className="text-[10px] text-muted/60">+{item.technologies.length - 3}</span>
+                        <span className="text-[10px] text-black/40">+{item.technologies.length - 3}</span>
                       )}
                     </div>
                   )}
@@ -268,14 +267,14 @@ export default function Portfolio() {
           <button
             onClick={() => scrollBy(1)}
             aria-label="Scroll right"
-            className="absolute -right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-white hover:border-red-500 hover:text-red-500 lg:flex"
+            className="absolute -right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm hover:border-red-600 hover:text-red-600 lg:flex"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
 
         {/* Item count */}
-        <div className="mt-6 text-center text-sm text-muted">
+        <div className="mt-6 text-center text-sm text-black/60">
           Showing {filteredItems.length} of {allItems.length} projects
         </div>
       </div>

@@ -18,13 +18,13 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section className="py-20 lg:py-28">
+    <section className="bg-white py-20 lg:py-28">
       <div className="container-px">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-red-600">
             Testimonials
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-extrabold text-black sm:text-4xl">
             What Our Clients Say
           </h2>
         </div>
@@ -33,13 +33,13 @@ export default function Testimonials() {
           <button
             onClick={() => go(-1)}
             aria-label="Previous testimonial"
-            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white hover:border-red-500 hover:text-red-500 sm:flex"
+            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm hover:border-red-600 hover:text-red-600 sm:flex"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
 
-          <div className="relative min-h-55 flex-1 overflow-hidden rounded-2xl border border-white/8 bg-surface px-8 py-10 text-center sm:px-12">
-            <Quote className="mx-auto h-8 w-8 text-red-500" fill="currentColor" strokeWidth={0} />
+          <div className="relative min-h-55 flex-1 overflow-hidden rounded-2xl border border-black/10 bg-white px-8 py-10 text-center shadow-sm sm:px-12">
+            <Quote className="mx-auto h-8 w-8 text-red-600" fill="currentColor" strokeWidth={0} />
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
@@ -48,14 +48,14 @@ export default function Testimonials() {
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.35 }}
               >
-                <p className="mt-4 text-base leading-relaxed text-neutral-200 sm:text-lg">
+                <p className="mt-4 text-base leading-relaxed text-black/80 sm:text-lg">
                   {current.quote}
                 </p>
                 <div className="mt-6 flex items-center justify-center gap-3">
                   <span className={`h-10 w-10 rounded-full ${avatarColors[index % avatarColors.length]}`} />
                   <div className="text-left">
-                    <p className="text-sm font-bold text-white">{current.name}</p>
-                    <p className="text-xs text-muted">{current.role}</p>
+                    <p className="text-sm font-bold text-black">{current.name}</p>
+                    <p className="text-xs text-black/60">{current.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -65,7 +65,7 @@ export default function Testimonials() {
           <button
             onClick={() => go(1)}
             aria-label="Next testimonial"
-            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-white hover:border-red-500 hover:text-red-500 sm:flex"
+            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-black shadow-sm hover:border-red-600 hover:text-red-600 sm:flex"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -78,7 +78,7 @@ export default function Testimonials() {
               onClick={() => setIndex(i)}
               aria-label={`Go to testimonial ${i + 1}`}
               className={`h-1.5 rounded-full transition-all ${
-                i === index ? "w-6 bg-red-500" : "w-1.5 bg-white/15"
+                i === index ? "w-6 bg-red-600" : "w-1.5 bg-black/15"
               }`}
             />
           ))}

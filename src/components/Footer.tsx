@@ -2,37 +2,34 @@
 import { MapPin, Phone, Mail, Globe, ArrowUp, Zap } from "lucide-react";
 import { footerLinks } from "@/data/site";
 import { SocialFacebook, SocialInstagram, SocialLinkedIn, SocialYoutube } from "@/components/SocialIcons";
-import logo from "../../public/mithilatechlogo.png"
+import logo from "../../public/mithilatechlogo.png";
 import Image from "next/image";
 
-
 const socials = [
-  { icon: SocialFacebook, label: "Facebook" },
-  { icon: SocialInstagram, label: "Instagram" },
-  { icon: SocialLinkedIn, label: "LinkedIn" },
-  { icon: SocialYoutube, label: "YouTube" },
+  { icon: SocialFacebook, label: "Facebook",'href':'https://www.facebook.com/profile.php?id=61585387076986' },
+  { icon: SocialInstagram, label: "Instagram",'href':'https://www.instagram.com/yoursmithila2025/' }
 ];
+
+
 
 export default function Footer() {
   return (
-    <footer id="contact" className="mt-16 border-t border-white/5 bg-surface/60">
+    <footer id="contact" className=" border-t  bg-white">
       <div className="container-px grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
         {/* Brand */}
         <div>
           <a href="/" className="flex items-center gap-2.5">
-           
-              <Image src={logo} width={100} height={100} alt="Logo"/>
-          
+            <Image src={logo} width={100} height={100} alt="Logo" />
             <span className="leading-tight">
-              <span className="block text-lg font-extrabold tracking-wide text-white">
+              <span className="block text-lg font-extrabold tracking-wide text-red-600">
                 MITHILA
               </span>
-              <span className="block text-[10px] font-medium tracking-[0.2em] text-muted">
+              <span className="block text-[10px] font-medium tracking-[0.2em] text-black">
                 TECH &amp; IT SOLUTIONS
               </span>
             </span>
           </a>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-black/60">
             We provide innovative IT solutions to help businesses grow online
             and achieve long-term success.
           </p>
@@ -40,9 +37,9 @@ export default function Footer() {
             {socials.map((s) => (
               <a
                 key={s.label}
-                href="/"
+                href={s.href}
                 aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-muted transition-colors hover:border-red-500 hover:text-red-500"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-black/60 transition-colors hover:border-red-600 hover:text-red-600"
               >
                 <s.icon className="h-4 w-4" />
               </a>
@@ -52,11 +49,11 @@ export default function Footer() {
 
         {/* Quick links */}
         <div>
-          <h4 className="text-sm font-bold uppercase tracking-wide text-white">Quick Links</h4>
+          <h4 className="text-sm font-bold uppercase tracking-wide text-black">Quick Links</h4>
           <ul className="mt-4 space-y-2.5">
             {footerLinks.quickLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className="text-sm text-muted hover:text-red-500">
+                <a href={link.href} className="text-sm text-black/60 hover:text-red-600">
                   {link.label}
                 </a>
               </li>
@@ -66,11 +63,11 @@ export default function Footer() {
 
         {/* Services */}
         <div>
-          <h4 className="text-sm font-bold uppercase tracking-wide text-white">Our Services</h4>
+          <h4 className="text-sm font-bold uppercase tracking-wide text-black">Our Services</h4>
           <ul className="mt-4 space-y-2.5">
             {footerLinks.services.map((label) => (
               <li key={label}>
-                <a href="#services" className="text-sm text-muted hover:text-red-500">
+                <a href="#services" className="text-sm text-black/60 hover:text-red-600">
                   {label}
                 </a>
               </li>
@@ -80,36 +77,36 @@ export default function Footer() {
 
         {/* Contact info */}
         <div>
-          <h4 className="text-sm font-bold uppercase tracking-wide text-white">Contact Info</h4>
+          <h4 className="text-sm font-bold uppercase tracking-wide text-black">Contact Info</h4>
           <ul className="mt-4 space-y-3.5">
-            <li className="flex items-start gap-3 text-sm text-muted">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
+            <li className="flex items-start gap-3 text-sm text-black/60">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
               Sallaghari, Bhaktapur, Bagmati, Nepal
             </li>
-            <li className="flex items-center gap-3 text-sm text-muted">
-              <Phone className="h-4 w-4 shrink-0 text-red-500" />
-               9829705977
+            <li className="flex items-center gap-3 text-sm text-black/60">
+              <Phone className="h-4 w-4 shrink-0 text-red-600" />
+              9829705977
             </li>
-            <li className="flex items-center gap-3 text-sm text-muted">
-              <Mail className="h-4 w-4 shrink-0 text-red-500" />
+            <li className="flex items-center gap-3 text-sm text-black/60">
+              <Mail className="h-4 w-4 shrink-0 text-red-600" />
               info@mithilatechsolutions.com
             </li>
-            <li className="flex items-center gap-3 text-sm text-muted">
-              <Globe className="h-4 w-4 shrink-0 text-red-500" />
+            <li className="flex items-center gap-3 text-sm text-black/60">
+              <Globe className="h-4 w-4 shrink-0 text-red-600" />
               mithilatechsolutions.com
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-white/5">
+      <div className="border-t border-black/10">
         <div className="container-px flex flex-col items-center justify-between gap-3 py-6 sm:flex-row">
-          <p className="text-xs text-muted">
+          <p className="text-xs text-black/60">
             © 2026 Mithila Tech &amp; IT Solutions Pvt. Ltd. All Rights Reserved.
           </p>
           <a
             href="#home"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 hover:text-red-500"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-black/70 hover:text-red-600"
           >
             Back to Top <ArrowUp className="h-3.5 w-3.5" />
           </a>
