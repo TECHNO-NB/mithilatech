@@ -1,37 +1,80 @@
+
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 export async function POST(req: Request) {
   try {
     const { name, email, subject, message } = await req.json();
 
-    if (!name || !email || !message) {
+    if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return NextResponse.json(
-        {
-          error: "Name, email and message are required.",
-        },
+        { error: "Name, email and message are required." },
         { status: 400 }
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json(
+        { error: "Please enter a valid email address." },
+        { status: 400 }
+      );
+    }
+
+    const {
+      SMTP_HOST,
+      SMTP_PORT,
+      SMTP_USER,
+      SMTP_PASSWORD,
+      CONTACT_EMAIL,
+    } = process.env;
+
+    if (
+      !SMTP_HOST ||
+      !SMTP_PORT ||
+      !SMTP_USER ||
+      !SMTP_PASSWORD ||
+      !CONTACT_EMAIL
+    ) {
+      throw new Error("SMTP environment variables are missing.");
+    }
+
+    const port = Number(SMTP_PORT);
+
+   const transporter = nodemailer.createTransport({
+        host: SMTP_HOST,
+        port,
+        secure: port === 465, 
+        auth: {
+          user: SMTP_USER,
+          pass: SMTP_PASSWORD,
+        },
+        tls: {
+          servername: "mail.mithilatechsolutions.com",
+        },
+        connectionTimeout: 30000,
+        greetingTimeout: 30000,
+        socketTimeout: 60000,
+});
+
+    const safeName = escapeHtml(name.trim());
+    const safeEmail = escapeHtml(email.trim());
+    const safeSubject = escapeHtml(subject?.trim() || "No subject");
+    const safeMessage = escapeHtml(message.trim());
 
     await transporter.sendMail({
-      from: `"Mithila Tech Website" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_EMAIL,
-      replyTo: email,
-      subject: subject || `New Contact Message from ${name}`,
+      from: `"Mithila Tech Website" <${SMTP_USER}>`,
+      to: CONTACT_EMAIL,
+      replyTo: email.trim(),
+      subject: subject?.trim() || `New Contact Message from ${name}`,
 
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 650px; margin: auto;">
@@ -44,56 +87,34 @@ export async function POST(req: Request) {
             <h2 style="margin: 0;">New Contact Form Message</h2>
           </div>
 
-          <div style="
-            padding: 25px;
-            border: 1px solid #eee;
-            border-top: 0;
-          ">
-            <p>
-              <strong>Name:</strong><br />
-              ${name}
-            </p>
+          <div style="padding: 25px; border: 1px solid #eee;">
+            <p><strong>Name:</strong><br />${safeName}</p>
+            <p><strong>Email:</strong><br />${safeEmail}</p>
+            <p><strong>Subject:</strong><br />${safeSubject}</p>
 
-            <p>
-              <strong>Email:</strong><br />
-              ${email}
-            </p>
-
-            <p>
-              <strong>Subject:</strong><br />
-              ${subject || "No subject"}
-            </p>
-
-            <p>
-              <strong>Message:</strong>
-            </p>
+            <p><strong>Message:</strong></p>
 
             <div style="
               padding: 15px;
               background: #f5f5f5;
               border-radius: 8px;
               white-space: pre-wrap;
-            ">
-              ${message}
-            </div>
+            ">${safeMessage}</div>
           </div>
         </div>
       `,
     });
 
     return NextResponse.json(
-      {
-        message: "Your message has been sent successfully!",
-      },
+      { message: "Your message has been sent successfully!" },
       { status: 200 }
     );
+
   } catch (error) {
     console.error("SMTP Error:", error);
 
     return NextResponse.json(
-      {
-        error: "Failed to send message. Please try again.",
-      },
+      { error: "Failed to send message. Please try again." },
       { status: 500 }
     );
   }
