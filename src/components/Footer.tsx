@@ -1,13 +1,18 @@
 // @ts-nocheck
 import { MapPin, Phone, Mail, Globe, ArrowUp, Zap } from "lucide-react";
 import { footerLinks } from "@/data/site";
-import { SocialFacebook, SocialInstagram, SocialLinkedIn, SocialYoutube } from "@/components/SocialIcons";
+import { SocialFacebook, SocialInstagram, SocialLinkedIn, SocialYoutube ,SocialTikTok,SocialWhatsApp} from "@/components/SocialIcons";
 import logo from "../../public/mithilatechlogo.png";
 import Image from "next/image";
 
 const socials = [
   { icon: SocialFacebook, label: "Facebook",'href':'https://www.facebook.com/profile.php?id=61585387076986' },
-  { icon: SocialInstagram, label: "Instagram",'href':'https://www.instagram.com/yoursmithila2025/' }
+  { icon: SocialInstagram, label: "Instagram",'href':'https://www.instagram.com/mithilatechsolutions?utm_source=ig_web_button_share_sheet&vrfl=ZDNlZDc0MzIxNw==' },
+  { icon: SocialLinkedIn, label: "LinkedIn",'href':'https://www.linkedin.com/company/114704003/admin/dashboard/' },
+  { icon: SocialTikTok, label: "Tiktok",'href':'https://www.tiktok.com/@mithilatechsolutions?is_from_webapp=1&sender_device=pc' },
+  { icon: SocialWhatsApp, label: "Whatsapp","href": "https://wa.me/9779829705977?text=Hi%20Mithila%20Tech%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services." }
+
+
 ];
 
 
